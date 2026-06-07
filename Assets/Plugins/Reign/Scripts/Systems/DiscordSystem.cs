@@ -4,6 +4,7 @@ using UnityEngine;
 using Discord;
 using Reign.Generic;
 using System;
+using System.Threading.Tasks;
 
 namespace Reign.Systems
 {
@@ -22,7 +23,7 @@ namespace Reign.Systems
 
     public sealed class DiscordSystem : System<DiscordSystem>
     {
-        private DiscordSystemData DefaultDiscordSystemData => Reign.currentGameCertificates.DEFAULT_DISCORD_RPC_DATA;
+        private DiscordSystemData DefaultDiscordSystemData => Reign.CurrentGameCertificates.DEFAULT_DISCORD_RPC_DATA;
 
         public bool CanConnect { get; private set; } = false;
         public bool IsConnected { get; private set; } = false;
@@ -58,9 +59,14 @@ namespace Reign.Systems
             currentDiscordSystemSettings.startUnixTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         }
 
-        private void Start()
+        private async void Start()
         {
-            CanConnect = Reign.currentGameCertificates.DISCORD_ENABLED;
+            while (Reign.CurrentGameCertificates == null)
+            {
+                await Task.Yield();
+            }
+
+            CanConnect = Reign.CurrentGameCertificates.DISCORD_ENABLED;
 
             if (DefaultDiscordSystemData.startUnixTimestamp == 0)
             {
@@ -101,7 +107,7 @@ namespace Reign.Systems
             {
                 try
                 {
-                    Discord = new Discord.Discord(Reign.currentGameCertificates.DISCORD_APP_ID, (ulong)CreateFlags.NoRequireDiscord);
+                    Discord = new Discord.Discord(Reign.CurrentGameCertificates.DISCORD_APP_ID, (ulong)CreateFlags.NoRequireDiscord);
                     UpdateStatus();
                 }
                 catch (Exception e)

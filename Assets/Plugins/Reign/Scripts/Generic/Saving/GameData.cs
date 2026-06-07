@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Reign.Generic.Audio;
 using Reign.Generic.Visuals;
 using UnityEngine;
 
@@ -9,13 +10,16 @@ namespace Reign.Generic.Saving
     {
         public ScreenSettings screenResolution;
 
-        public float masterAudioVolume;
+        public List<MixerParameter> mixerParameters;
 
         public GameData()
         {
             screenResolution = new ScreenSettings(1280, 720, false, true, true);
 
-            masterAudioVolume = -2.0f; // in Decibels
+            mixerParameters = new()
+            {
+                new() { value = -1.94f, exposedParameter = "Master Volume"}
+            };
         }
     }
 }

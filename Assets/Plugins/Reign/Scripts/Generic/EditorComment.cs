@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 #pragma warning disable CS0414 // The private field is assigned but its value is never used
 
 using NaughtyAttributes;
@@ -8,6 +7,9 @@ namespace Reign.Editor
 {
     public sealed class EditorComment : MonoBehaviour
     {
+#if UNITY_EDITOR
+
+        // Don't include in builds:
         [TextArea(10, 30), SerializeField, Label("")] string comment;
 
         void Awake()
@@ -15,7 +17,6 @@ namespace Reign.Editor
             // Clear on Awake()
             comment = null;
         }
+#endif
     }
 }
-
-#endif

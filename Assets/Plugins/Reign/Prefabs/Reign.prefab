@@ -208,7 +208,7 @@ MonoBehaviour:
   - {fileID: 5032680422019243299}
   - {fileID: 8557099285751241260}
   log: 0
-  gameCertifciatesAssetDirectory: Assets/ScriptableObjects/Game Certificates.asset
+  gameCertifciates: {fileID: 11400000, guid: 021dd5a5541414e7f8af3ebb08ef12e1, type: 2}
 --- !u!114 &1042509759720609901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 4839786222719983056}
   - component: {fileID: 7182083637351474559}
   - component: {fileID: 5032680422019243299}
+  - component: {fileID: 1613900902327836828}
   - component: {fileID: 8557099285751241260}
   m_Layer: 0
   m_Name: Systems
@@ -305,7 +306,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
   audioPool: {fileID: 11400000, guid: 708061da19fa7b647adb2bf914a90235, type: 2}
-  masterAudioMixerGroup: {fileID: 24300002, guid: 8c1d61f11b0f80a47baa1a0cc9243a06, type: 2}
 --- !u!114 &4047937867864585987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +375,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
   loadOverlay: {fileID: 8070653452871922402}
+--- !u!114 &1613900902327836828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904663793570437277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d38c0244e87dcd909ae8f50fe2946aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::Reign.Systems.MixerSystem
+  dontDestroyOnLoad: 0
+  mixers:
+  - {fileID: 24100000, guid: 8c1d61f11b0f80a47baa1a0cc9243a06, type: 2}
 --- !u!114 &8557099285751241260
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Reign.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -16,24 +17,23 @@ namespace Reign.Utility
             return $"v{ReignServiceDetails.REIGN_VERSION} | Released: {ReignServiceDetails.RELEASE_DATE}";
         }
 
-
         /// <summary>
         /// Set time scale to 0 for a certain amount of time
         /// </summary>
-        public static IEnumerator TimeStop(float length)
+        public static IEnumerator TimeStop(float wait)
         {
-            float og = Time.timeScale;
+            float original = Time.timeScale;
             Time.timeScale = 0f;
 
             float curTime = 0f;
 
-            while (curTime < length)
+            while (curTime < wait)
             {
                 curTime += Time.unscaledDeltaTime;
                 yield return null;
             }
 
-            Time.timeScale = og;
+            Time.timeScale = original;
         }
 
         /// <summary>
@@ -262,10 +262,126 @@ namespace Reign.Utility
         /// <summary>
         /// Return factorial of a number
         /// </summary>
-        public static long Factorial(int number)
+        public static long Factorial(int baseValue)
         {
-            if (number < 0) throw new ArgumentException($"Number ({number}) must be greater than or equal to zero.");
-            return (number == 0) ? 1 : number * Factorial(number - 1);
+            if (baseValue < 0) throw new ArgumentException($"Number ({baseValue}) must be greater than or equal to zero.");
+
+            long num = 1;
+
+            for (int i = 2; i <= baseValue; i++)
+            {
+                num *= i;
+            }
+
+            return num;
+        }
+
+        /// <summary>
+        /// Returns the average color of each pixel in a sprite
+        /// </summary>
+        public static Color AverageSpriteColor(Sprite sprite)
+        {
+            Color[] colors = sprite.texture.GetPixels();
+
+            float r = 0f;
+            float g = 0f;
+            float b = 0f;
+            float a = 0f;
+
+            foreach (Color c in colors)
+            {
+                r += c.r;
+                g += c.g;
+                b += c.b;
+                a += c.a;
+            }
+
+            int len = colors.Length;
+            return new Color(r / len, g / len, b / len, a / len); // Return average of all color values
+        }
+
+        /// <summary>
+        /// Swap value of index with value of front
+        /// </summary>
+        public static List<T> Front<T>(List<T> list, int index)
+        {
+            (list[index], list[0]) = (list[0], list[index]);
+            return list;
+        }
+
+        /// <summary>
+        /// Get the center of the screen 
+        /// </summary>
+        public static Vector2 GetScreenCenter()
+        {
+            return new(Screen.width * 0.5f, Screen.height * 0.5f);
+        }
+
+        /// <summary>
+        /// Fires a ray from the center of the screen from a camera position
+        /// </summary>
+        public static Ray CameraCenterRay(Camera cam)
+        {
+            return cam.ScreenPointToRay(GetScreenCenter());
+        }
+
+        /// <summary>
+        /// Fires a raycast from the center of the screen from a camera position
+        /// </summary>
+        public static bool CameraCenterRaycast(Camera cam, out RaycastHit hit)
+        {
+            return Physics.Raycast(CameraCenterRay(cam), out hit);
+        }
+
+        /// <summary>
+        /// Fires a raycast from the center of the screen from a camera position with a max distance
+        /// </summary>
+        public static bool CameraCenterRaycast(Camera cam, out RaycastHit hit, float maxDistance)
+        {
+            return Physics.Raycast(CameraCenterRay(cam), out hit, maxDistance);
+        }
+
+        /// <summary>
+        /// Fires a raycast from the center of the screen from a camera position with a max distance on a layer mask
+        /// </summary>
+        public static bool CameraCenterRaycast(Camera cam, out RaycastHit hit, float maxDistance, LayerMask mask)
+        {
+            return Physics.Raycast(CameraCenterRay(cam), out hit, maxDistance, mask);
+        }
+
+        /// <summary>
+        /// Fires a raycast from the center of the screen from a camera position 
+        /// with a max distance on a layer mask and a query trigger interaction
+        /// </summary>
+        public static bool CameraCenterRaycast(Camera cam, out RaycastHit hit, float maxDistance, LayerMask mask, QueryTriggerInteraction triggerInteraction)
+        {
+            return Physics.Raycast(CameraCenterRay(cam), out hit, maxDistance, mask, triggerInteraction);
+        }
+
+        /// <summary>
+        /// Convert amount of seconds to 0:00 format
+        /// </summary>
+        public static string SecondsToMinutesSeconds(int seconds)
+        {
+            if (seconds < 0)
+            {
+                throw new IndexOutOfRangeException($"Negative values of time ({seconds}) can not be converted.");
+            }
+
+            return $"{seconds / 60}:{seconds % 60:D2}";
+        }
+
+        /// <summary>
+        /// Convert amount of seconds to 0:00:00 format
+        /// </summary>
+        public static string SecondsToHoursMinutesSeconds(int seconds)
+        {
+            if (seconds < 0)
+            {
+                throw new IndexOutOfRangeException($"Negative values of time ({seconds}) can not be converted.");
+            }
+
+            return $"{seconds / 3600}:{((seconds % 3600) / 60):D2}:{seconds % 60:D2}";
         }
 
 #if UNITY_EDITOR

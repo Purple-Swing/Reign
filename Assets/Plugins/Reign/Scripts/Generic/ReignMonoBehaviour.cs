@@ -15,17 +15,19 @@ namespace Reign.Generic
         }
 
         /// <summary>
-        /// Get children of the transform the ReignMonoBehaviour is attached to
+        /// Get a list children of the Transform the ReignMonoBehaviour is attached to
         /// </summary>
-        public IEnumerable<Transform> GetChildren
+        public List<Transform> GetChildren()
         {
-            get
+            var childCount = transform.childCount;
+            List<Transform> children = new();
+
+            for (int i = 0; i < childCount; ++i)
             {
-                for (int i = 0; i < transform.childCount; ++i)
-                {
-                    yield return transform.GetChild(i);
-                }
+                children.Add(transform.GetChild(i));
             }
+
+            return children;
         }
     }
 }

@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace Reign.Systems
 {
-    public sealed class AudioSystem : System<AudioSystem>, IDataHandler
+    public sealed class AudioSystem : System<AudioSystem>
     {
         [SerializeField] private AudioPool audioPool;
-        [SerializeField] AudioMixerGroup masterAudioMixerGroup;
         private readonly Dictionary<string, AudioPoolEntry> audioEntries = new();
 
         public void OnValidate()
@@ -65,10 +64,6 @@ namespace Reign.Systems
         /// <summary>
         /// Set up the source depending on parameters
         /// </summary>
-        /// <param name="source">Required audio source</param>
-        /// <param name="entry">Audio pool entry to parse data from</param>
-        /// <param name="pos">Nullable Vector3 to place the source transform position at</param>
-        /// <param name="loop">If the source should loop</param>
         private static void SourceSetup(AudioSource source, AudioPoolEntry entry, Vector3? pos, bool loop = false)
         {
             source.loop = loop;
@@ -90,11 +85,6 @@ namespace Reign.Systems
         /// <summary>
         /// Play an audio pool entry with the same name from a given source
         /// </summary>
-        /// <param name="source">Source to play from</param>
-        /// <param name="name">Matching audio pool entry name</param>
-        /// <param name="pos">Nullable Vector3 to play at</param>
-        /// <param name="index">Index of entry's clip array to pull from</param>
-        /// <param name="loop">If the source should loop</param>
         public void Play(AudioSource source, string name, Vector3? pos, int index = 0, bool loop = false)
         {
             var entry = GetEntry(name);
@@ -108,10 +98,6 @@ namespace Reign.Systems
         /// <summary>
         /// Play one shot audio pool entry with the same name from a source. For looping, use Play()
         /// </summary>
-        /// <param name="source">Source to play from</param>
-        /// <param name="name">Matching audio pool entry name</param>
-        /// <param name="pos">Nullable Vector3 to play at</param>
-        /// <param name="index">Index of entry's clip array to pull from</param>
         public void PlayOneShot(AudioSource source, string name, Vector3? pos, int index = 0)
         {
             var entry = GetEntry(name);
@@ -124,16 +110,11 @@ namespace Reign.Systems
         /// <summary>
         /// Create a new GameObject with an audio source and play the audio pool entry with the same name
         /// </summary>
-        /// <param name="name">Matching audio pool entry name</param>
-        /// <param name="pos">Nullable Vector3 to play at</param>
-        /// <param name="index">Index of entry's clip array to pull from</param>
-        /// <param name="loop">If the source should loop</param>
-        /// <param name="destroyOnComplete">If the game object should be destroyed when the sound is finished</param>
-        public AudioSource PlayCreateInstance(string name, Vector3? pos, int index = 0, bool loop = false, bool destroyOnComplete = true)
+        public AudioSource PlayCreateInstance(string name, Vector3? pos, AudioMixerGroup mixerGroup, int index = 0, bool loop = false, bool destroyOnComplete = true)
         {
             GameObject newSound = new($"Sound Instance ({name})");
             AudioSource source = newSound.AddComponent<AudioSource>();
-            source.outputAudioMixerGroup = masterAudioMixerGroup;
+            source.outputAudioMixerGroup = mixerGroup;
             Play(source, name, pos, index, loop);
 
             if (destroyOnComplete)
@@ -155,15 +136,6 @@ namespace Reign.Systems
             {
                 Destroy(source.gameObject);
             }
-        }
-
-        public void LoadData(GameData DATA)
-        {
-            masterAudioMixerGroup.audioMixer.SetFloat("Volume", DATA.masterAudioVolume);
-        }
-
-        public void SaveData(ref GameData DATA)
-        {
         }
     }
 }

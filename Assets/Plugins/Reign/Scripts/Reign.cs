@@ -12,12 +12,12 @@ namespace Reign
     {
         [SerializeField] private List<SystemBase> requiredSystems;
         [SerializeField] private bool log;
-        [SerializeField] private string gameCertifciatesAssetDirectory = "Assets/ScriptableObjects/Game Certificates.asset";
-        public static GameCertificates currentGameCertificates;
+        [SerializeField] private GameCertificates gameCertifciates;
+        public static GameCertificates CurrentGameCertificates { get; private set; }
 
         private void Awake()
         {
-            currentGameCertificates = AssetDatabase.LoadAssetAtPath<GameCertificates>(gameCertifciatesAssetDirectory);
+            CurrentGameCertificates = gameCertifciates;
 
             if (!log) return;
 

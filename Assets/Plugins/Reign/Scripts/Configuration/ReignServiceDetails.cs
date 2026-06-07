@@ -6,8 +6,8 @@ namespace Reign.Generic
     {
         // DO NOT EDIT THESE FIELDS, THEY ARE STRICTLY USED TO CATEGORISE REIGN'S CURRENT DEVELOPMENT STATE. 
 
-        public const string REIGN_VERSION = "1.0.0.0";                                  // Version
-        public const string RELEASE_DATE = "2026-05-12";                                // YYYY-MM-DD Format
+        public const string REIGN_VERSION = "1.0.1.0";                                  // Version
+        public const string RELEASE_DATE = "2026-06-07";                                // YYYY-MM-DD Format
         public static readonly ReadOnlyCollection<string> CONTRIBUTORS = new            // Contributors to Reign since conception
         (
             new[]

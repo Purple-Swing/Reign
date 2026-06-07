@@ -1,6 +1,5 @@
 using Reign.Generic.Saving;
 using Reign.Interfaces;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -20,7 +19,8 @@ namespace Reign.Systems
         public void SaveData(ref GameData DATA)
         {
             // Save current options
-            DATA.screenResolution = new(Screen.width, Screen.height, Screen.fullScreen, QualitySettings.vSyncCount == 1, DATA.screenResolution.postProcess);
+            DATA.screenResolution = new(Screen.width, Screen.height, Screen.fullScreen, QualitySettings.vSyncCount == 1,
+            DATA.screenResolution.postProcess);
         }
     }
 }

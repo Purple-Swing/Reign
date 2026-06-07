@@ -57,7 +57,7 @@ namespace Reign.Systems
         /// <returns></returns>
         public async Task LoadGameData()
         {
-            if (!Reign.currentGameCertificates.SAVE_SYSTEM_ENABLED)
+            if (!Reign.CurrentGameCertificates.SAVE_SYSTEM_ENABLED)
             {
                 Debug.Log("Data tried to load, but SAVE_SYSTEM_ENABLED flag is false");
                 return;
@@ -79,7 +79,7 @@ namespace Reign.Systems
         /// <returns></returns>
         public async Task SaveGameDataAsync()
         {
-            if (!Reign.currentGameCertificates.SAVE_SYSTEM_ENABLED)
+            if (!Reign.CurrentGameCertificates.SAVE_SYSTEM_ENABLED)
             {
                 Debug.Log("Data tried to save, but SAVE_SYSTEM_ENABLED flag is false");
                 return;
@@ -99,7 +99,7 @@ namespace Reign.Systems
         /// <returns></returns>
         public void SaveGameDataSync()
         {
-            if (!Reign.currentGameCertificates.SAVE_SYSTEM_ENABLED)
+            if (!Reign.CurrentGameCertificates.SAVE_SYSTEM_ENABLED)
             {
                 Debug.Log("Data tried to save, but SAVE_SYSTEM_ENABLED flag is false");
                 return;
@@ -116,7 +116,12 @@ namespace Reign.Systems
         // Runtime
         private async Task SetupAsync()
         {
-            if (!Reign.currentGameCertificates.SAVE_SYSTEM_ENABLED) return;
+            while (Reign.CurrentGameCertificates == null)
+            {
+                await Task.Yield();
+            }
+
+            if (!Reign.CurrentGameCertificates.SAVE_SYSTEM_ENABLED) return;
 
             RefreshHandlers();
 
@@ -125,7 +130,7 @@ namespace Reign.Systems
 
         private void OnApplicationQuit()
         {
-            if (Reign.currentGameCertificates.SAVE_ON_QUIT)
+            if (Reign.CurrentGameCertificates.SAVE_ON_QUIT)
             {
                 SaveGameDataSync();
             }
@@ -133,23 +138,19 @@ namespace Reign.Systems
 
         private void OnEnable()
         {
-            // For every scene loaded, setup.
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            // For current scene changed, setup.
+            SceneManager.activeSceneChanged += SceneChanged;
         }
 
         private void OnDisable()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.activeSceneChanged -= SceneChanged;
         }
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        private void SceneChanged(Scene scene, Scene scene2)
         {
-            StartCoroutine(Setup());
-        }
+            // Scene change guarantees that we are in a new scene and can refresh data.
 
-        private IEnumerator Setup()
-        {
-            yield return null;
             RefreshHandlers();
             RunSetup();
         }

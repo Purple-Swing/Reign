@@ -11,10 +11,13 @@ namespace Reign.Generic.Saving
 {
     public sealed class SaveFileHandler
     {
-        private byte[] Pass => Encoding.UTF8.GetBytes(Reign.currentGameCertificates.SAVE_PASSWORD);
-        private byte[] Salt => Encoding.UTF8.GetBytes(Reign.currentGameCertificates.SAVE_SALT);
-        private string SavePath => Path.Combine(Application.persistentDataPath, Reign.currentGameCertificates.SAVE_FILE_DIRECTORY);
-        private bool DoEncrypt => Reign.currentGameCertificates.SAVE_ENCRYPT;
+        // We only use SaveFileHandler in SaveSystem, so we don't need to check 
+        // that CurrentGameCertificates is valid. (SaveSystem does it for us.)
+
+        private byte[] Pass => Encoding.UTF8.GetBytes(Reign.CurrentGameCertificates.SAVE_PASSWORD);
+        private byte[] Salt => Encoding.UTF8.GetBytes(Reign.CurrentGameCertificates.SAVE_SALT);
+        private string SavePath => Path.Combine(Application.persistentDataPath, Reign.CurrentGameCertificates.SAVE_FILE_DIRECTORY);
+        private bool DoEncrypt => Reign.CurrentGameCertificates.SAVE_ENCRYPT;
 
         #region API
 
@@ -134,7 +137,7 @@ namespace Reign.Generic.Saving
             using var key = new Rfc2898DeriveBytes(
                 Pass,
                 Salt,
-                Reign.currentGameCertificates.SAVE_ITERATIONS,
+                Reign.CurrentGameCertificates.SAVE_ITERATIONS,
                 HashAlgorithmName.SHA256
             );
 
@@ -169,7 +172,7 @@ namespace Reign.Generic.Saving
             using var key = new Rfc2898DeriveBytes(
                 Pass,
                 Salt,
-                Reign.currentGameCertificates.SAVE_ITERATIONS,
+                Reign.CurrentGameCertificates.SAVE_ITERATIONS,
                 HashAlgorithmName.SHA256
             );
 

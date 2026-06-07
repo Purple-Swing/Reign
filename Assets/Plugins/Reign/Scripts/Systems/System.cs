@@ -8,7 +8,7 @@ namespace Reign.Systems
 
     public abstract class System<T> : SystemBase where T : System<T>
     {
-        // System<T> is its own singleton, but making it inherit Singleton<T> directly has problems.
+        // System<T> is its own Singleton, making it inherit Singleton<T> directly has problems in Reign.cs
 
         [SerializeField] bool dontDestroyOnLoad;
 
