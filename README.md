@@ -3,16 +3,12 @@
 </p>
 
 <h3 align="center">
-    © PURPLE SWING | 2026
+    © Purple Swing, 2026
 </h3>
 
 <p align="center">
     <a href="/Documentation/Home.md">Documentation</a> | <a href="/LICENSE.md">License</a> | <a href="/CONTRIBUTING.md">Contribution</a>
 </p>
-
----
-
-### 🟢 VERSION 1.0 IS NOW LIVE
 
 ---
 
@@ -28,6 +24,7 @@ Reign is the solution to all problems when starting an ambitious Unity project. 
 
 - Expandable cross-platform save file system
 - Easily managable audio system
+- Mixer system that links the audio system to the save system. 
 - Flexible input system
 - Discord RPC support
 - Scene loading system (including transitions)
@@ -36,16 +33,17 @@ Reign is the solution to all problems when starting an ambitious Unity project. 
 - Asynchronous Event Bus and Query Bus
 - Object pooling
 - [DOTween (Free)](https://dotween.demigiant.com/) by Demigiant
+<br>and much more...
+
+---
+
+### Documentation
+[Documentation](/Documentation/Home.md) is still being created and finalised, but as Reign straightens out: we will continue to make corrections and changes. 
 
 ---
 
 ### Development
 
-#### Versioning
-
-<img src="/GitHub/VersioningScheme.png" width=70%></img>
-
-#### Branches
-
+Reign's Releases:
 - "Legacy" - 0.5.0.1 and prior - `🔴 Deprecated, unrecommended`
 - "Modern" - 1.0.0.0 and up - `🟢 Fully supported`
