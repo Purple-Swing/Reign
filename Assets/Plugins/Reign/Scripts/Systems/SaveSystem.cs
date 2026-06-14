@@ -151,7 +151,6 @@ namespace Reign.Systems
         {
             // Scene change guarantees that we are in a new scene and can refresh data.
 
-            RefreshHandlers();
             RunSetup();
         }
 
