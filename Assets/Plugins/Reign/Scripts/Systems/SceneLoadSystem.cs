@@ -17,9 +17,6 @@ namespace Reign.Systems
         /// <summary>
         /// Transition the load overlay image in or out
         /// </summary>
-        /// <param name="isIn">Should the image fade in</param>
-        /// <param name="speed">Speed of the fade</param>
-        /// <returns></returns>
         private async Task TransitionAsync(bool isIn, float speed = 1.0f)
         {
             float target = isIn ? 1f : 0f;
@@ -41,8 +38,6 @@ namespace Reign.Systems
         /// <summary>
         /// Load scene by name asynchronously
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
         private Task<bool> LoadSceneAsync(string name)
         {
             var completionSource = new TaskCompletionSource<bool>();
@@ -58,9 +53,6 @@ namespace Reign.Systems
         /// <summary>
         /// Transition and await asynchronous scene load
         /// </summary>
-        /// <param name="name">Name of the scene to load</param>
-        /// <param name="transitionSpeed">Load overlay fade transition speed</param>
-        /// <returns></returns>
         public async Task LoadScene(string name, float transitionSpeed = 1.0f)
         {
             // Fade in

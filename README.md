@@ -24,7 +24,7 @@ Reign is the solution to all problems when starting an ambitious Unity project. 
 
 - Expandable cross-platform save file system
 - Easily managable audio system
-- Mixer system that links the audio system to the save system. 
+- Mixer system that controls audio mixer groups
 - Flexible input system
 - Discord RPC support
 - Scene loading system (including transitions)
