@@ -26,7 +26,7 @@ namespace Reign.Systems
         /// <returns></returns>
         public static List<IDataHandler> GetDataHandlers()
         {
-            // Start from MonoBehaviour and not ReignMonoBehaviour because it inherits MonoBehaviour
+            // Start from MonoBehaviour and not ReignMonoBehaviour because that inherits MonoBehaviour
             return FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include).OfType<IDataHandler>().ToList();
         }
 

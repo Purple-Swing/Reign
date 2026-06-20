@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Discord;
 using Reign.Systems;
 using UnityEngine;
 
@@ -24,18 +25,27 @@ namespace Reign.Generic
 
         [Header("Discord")]
         public bool DISCORD_ENABLED = true;
-        public long DISCORD_APP_ID = 1453862071543271508;
 
         public DiscordSystemData DEFAULT_DISCORD_RPC_DATA = new()
         {
+            appID = 1453862071543271508,
             details = "",
             state = "",
+
             largeImage = "",
             largeImageText = "",
             smallImage = "",
             smallImageText = "",
+            
             startUnixTimestamp = 0,
-            endUnixTimestamp = 0
+            endUnixTimestamp = 0,
+
+            partyID = "",
+            partySize = {CurrentSize = 0, MaxSize = 0},
+            activityPartyPrivacy = ActivityPartyPrivacy.Private,
+
+            activityType = ActivityType.Playing,
+            activitySecrets = { Match = "", Join = "", Spectate = "" }            
         };
     }
 }

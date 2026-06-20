@@ -1,42 +1,21 @@
 using System.Collections;
-using Reign.Generic;
+using Reign.Generic.Shared;
 using UnityEngine;
 
 namespace Reign.Systems
 {
-    public abstract class SystemBase : ReignMonoBehaviour { }
-
-    public abstract class System<T> : SystemBase where T : System<T>
+    public abstract class System<T> : Singleton<T> where T : ReignMonoBehaviour
     {
-        // System<T> is its own Singleton, making it inherit Singleton<T> directly has problems in Reign.cs
+        #if UNITY_EDITOR
+        
+        [SerializeField] private bool logInfo;
 
-        [SerializeField] bool dontDestroyOnLoad;
-
-        private static T instance;
-        public static T Instance
+        private void Start()
         {
-            get
-            {
-                if (instance != null) return instance;
+            if (!logInfo) return;
+            Debug.Log($"System (type {typeof(T)}) initialised.");
+        } 
 
-                if (!Application.isPlaying) return null;
-
-                instance = FindAnyObjectByType<T>();
-                return instance;
-            }
-        }
-
-        IEnumerator Start()
-        {
-            if (instance != null && instance != this)
-            {
-                Destroy(gameObject);
-                yield break;
-            }
-
-            instance = this as T;
-
-            if (dontDestroyOnLoad) DontDestroyOnLoad(gameObject);
-        }
+        #endif
     }
 }

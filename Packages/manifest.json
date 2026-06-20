@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm",
+    "com.dbrizov.naughtyattributes": "2.1.5",
     "com.discord.game-sdk": "3.1.0",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "2.0.12",
@@ -56,6 +56,13 @@
       "url": "https://upm.houraiteahouse.net",
       "scopes": [
         "com.discord"
+      ]
+    },
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.dbrizov.naughtyattributes"
       ]
     }
   ]

@@ -11,14 +11,27 @@ namespace Reign.Systems
     [Serializable]
     public struct DiscordSystemData
     {
+        public long appID;
+
+        public string name;
         public string details;
         public string state;
+        
         public string largeImage;
         public string largeImageText;
         public string smallImage;
         public string smallImageText;
+        
         public long startUnixTimestamp;
         public long endUnixTimestamp;
+
+        public string partyID;
+        public PartySize partySize;
+        public ActivityPartyPrivacy activityPartyPrivacy;
+
+        public ActivityType activityType;
+
+        public ActivitySecrets activitySecrets;
     }
 
     public sealed class DiscordSystem : System<DiscordSystem>
@@ -107,7 +120,7 @@ namespace Reign.Systems
             {
                 try
                 {
-                    Discord = new Discord.Discord(Reign.CurrentGameCertificates.DISCORD_APP_ID, (ulong)CreateFlags.NoRequireDiscord);
+                    Discord = new Discord.Discord(currentDiscordSystemSettings.appID, (ulong)CreateFlags.NoRequireDiscord);
                     UpdateStatus();
                 }
                 catch (Exception e)
@@ -142,8 +155,14 @@ namespace Reign.Systems
 
                 Activity activity = new()
                 {
+                    ApplicationId = currentDiscordSystemSettings.appID,
+
+                    Type = currentDiscordSystemSettings.activityType,
+
                     Details = currentDiscordSystemSettings.details,
+
                     State = currentDiscordSystemSettings.state,
+                    
                     Assets =
                     {
                         LargeImage = currentDiscordSystemSettings.largeImage,
@@ -157,6 +176,15 @@ namespace Reign.Systems
                         Start = currentDiscordSystemSettings.startUnixTimestamp,
                         End = currentDiscordSystemSettings.endUnixTimestamp
                     },
+
+                    Party =
+                    {
+                        Id = currentDiscordSystemSettings.partyID,
+                        Size = currentDiscordSystemSettings.partySize,
+                        Privacy = currentDiscordSystemSettings.activityPartyPrivacy,
+                    },
+
+                    Secrets = currentDiscordSystemSettings.activitySecrets
                 };
 
                 manager.UpdateActivity(activity, result =>

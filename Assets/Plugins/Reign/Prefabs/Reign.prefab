@@ -159,8 +159,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7365501858645757946}
   - component: {fileID: 7160570749908510879}
-  - component: {fileID: 1042509759720609901}
-  - component: {fileID: 6634572504446025252}
   m_Layer: 0
   m_Name: Reign
   m_TagString: Untagged
@@ -199,60 +197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
-  requiredSystems:
-  - {fileID: 3602144223584130361}
-  - {fileID: 4047937867864585987}
-  - {fileID: 10333360435678731}
-  - {fileID: 4839786222719983056}
-  - {fileID: 7182083637351474559}
-  - {fileID: 5032680422019243299}
-  - {fileID: 8557099285751241260}
   log: 0
   gameCertifciates: {fileID: 11400000, guid: 021dd5a5541414e7f8af3ebb08ef12e1, type: 2}
---- !u!114 &1042509759720609901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6419290268535131545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49570b694e1bd204489e5e5f5696e3ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  comment: "---------------------------------------\n\n=-- Reign | \xA9 Purple Swing
-    --=\n\nThe solution to all problems when starting an ambitious Unity project.
-    Countless systems working asynchronously to perform as well as possible, even
-    on low-end devices, to make creating great games simple.\n\n---------------------------------------"
---- !u!114 &6634572504446025252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6419290268535131545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49570b694e1bd204489e5e5f5696e3ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  comment: "             REIGN v1.0.0.0\n---------------------------------------\n\n=--------
-    CHANGELOG --------=\n\n- Updated Unity version to 6000.4.4f1\n\n- Recreated Reign
-    and its systems from scratch for the final time\n\n- Made Audio System capable
-    of using multiple clips per entry and playing one index when using any variation
-    of Play()\n\n- Made EventBus and QueryBus seperate scripts\n\n- Made EventBus
-    and QueryBus async and thread safe\n\n- Made EventBus type safe\n\n- Made SaveSystem
-    asynchronous to avoid long stutters between saving and loading \n\n- Less wasteful
-    Discord Remote Procedure Calls\n\n- Audio system now uses a master mixer channel
-    by default, and assigns to the exposed volume parameter in LoadData()\n\n- Added
-    many useful utility functions to ReignUtils.cs\n\n- Added Reign Essentials (Built-in
-    scripts for Reign)\n\n- Added Reign Internals (Scripts used for testing Reign
-    features)\n\n- Added Reign Tools Window (Helper for Reign)\n\n- Added object
-    pooling with PoolSystem\n\n- Made scene loading as well as the transition asynchronous\n\n-
-    Refactored how DiscordSystem handles rich presence\n\n- Added a toggle for Reign
-    logging after finding all required systems or successfully loading\n\n- Refactored
-    InputSystem to utilise new Input System package"
 --- !u!1 &8904663793570437277
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  logInfo: 0
   audioPool: {fileID: 11400000, guid: 708061da19fa7b647adb2bf914a90235, type: 2}
 --- !u!114 &4047937867864585987
 MonoBehaviour:
@@ -319,6 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  logInfo: 0
 --- !u!114 &10333360435678731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  logInfo: 0
   globalVolume: {fileID: 4669575924893501924}
 --- !u!114 &4839786222719983056
 MonoBehaviour:
@@ -346,6 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::Reign.InputSystem
   dontDestroyOnLoad: 0
+  logInfo: 0
   ActiveActionMapIndex: 0
   inputActions: {fileID: -944628639613478452, guid: 1f56ef3feffd44ee5bda5196196d8ac4, type: 3}
 --- !u!114 &7182083637351474559
@@ -361,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  logInfo: 0
 --- !u!114 &5032680422019243299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,6 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 0
+  logInfo: 0
   loadOverlay: {fileID: 8070653452871922402}
 --- !u!114 &1613900902327836828
 MonoBehaviour:
@@ -388,6 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::Reign.Systems.MixerSystem
   dontDestroyOnLoad: 0
+  logInfo: 0
   mixers:
   - {fileID: 24100000, guid: 8c1d61f11b0f80a47baa1a0cc9243a06, type: 2}
 --- !u!114 &8557099285751241260
@@ -403,3 +356,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::Reign.Systems.PoolSystem
   dontDestroyOnLoad: 0
+  logInfo: 0

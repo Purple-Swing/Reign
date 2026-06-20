@@ -24,8 +24,9 @@ MonoBehaviour:
   SAVE_SALT: save_salt
   SAVE_ITERATIONS: 2048
   DISCORD_ENABLED: 1
-  DISCORD_APP_ID: 1453862071543271508
   DEFAULT_DISCORD_RPC_DATA:
+    appID: 1453862071543271508
+    name: 
     details: 
     state: Testing Reign
     largeImage: 
@@ -34,3 +35,6 @@ MonoBehaviour:
     smallImageText: 
     startUnixTimestamp: 0
     endUnixTimestamp: 0
+    partyID: 
+    activityPartyPrivacy: 0
+    activityType: 0

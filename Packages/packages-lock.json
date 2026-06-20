@@ -8,11 +8,10 @@
       "url": "https://packages.unity.com"
     },
     "com.dbrizov.naughtyattributes": {
-      "version": "https://github.com/dbrizov/NaughtyAttributes.git#upm",
+      "version": "file:com.dbrizov.naughtyattributes",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "15035ad90aba29cffd7bb5f9e4d67724d5e5878c"
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.discord.game-sdk": {
       "version": "file:com.discord.game-sdk",

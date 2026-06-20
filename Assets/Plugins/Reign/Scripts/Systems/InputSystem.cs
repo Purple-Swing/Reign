@@ -96,6 +96,7 @@ namespace Reign.Systems
         {
             return inputType switch
             {
+                InputType.DEFERRED => false,
                 InputType.PRESSED => action.wasPressedThisFrame,
                 InputType.RELEASED => action.wasReleasedThisFrame,
                 InputType.PRESSING => action.isPressed,
@@ -107,6 +108,7 @@ namespace Reign.Systems
         {
             return inputType switch
             {
+                InputType.DEFERRED => action.WasPerformedThisFrame(),
                 InputType.PRESSED => action.WasPressedThisFrame(),
                 InputType.RELEASED => action.WasReleasedThisFrame(),
                 InputType.PRESSING => action.IsPressed(),
@@ -117,16 +119,15 @@ namespace Reign.Systems
         /// <summary>
         /// Get button down by action name and input type.
         /// </summary>
-        public bool GetButton(string actionName, InputType inputType, bool requireAllBindings = false)
+        public bool GetButton(string actionName, InputType inputType = InputType.DEFERRED, bool requireAllBindings = false)
         {
-            if (currentMap == null)
-                return false;
+            if (currentMap == null) return false;
 
             var action = FindAction(actionName);
             if (action == null) return false;
 
             // Only one needed to be down
-            if (!requireAllBindings)
+            if (!requireAllBindings || inputType == InputType.DEFERRED)
             {
                 return IsValid(inputType, action);
             }
