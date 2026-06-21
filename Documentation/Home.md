@@ -7,7 +7,7 @@
 ---
 
 #### Documentation Completion
-**|--------------o--------------| ~50%**
+**|----------------o------------| ~55%**
 
 Documentation will expand as we create more in-depth versions of Reign, including new features and general improvements. There will be commits to Reign that sometimes simply develop documentation.
 
@@ -33,7 +33,7 @@ Every list element that is not a link is a topic that has not been finished.
 - [2.5 - Discord System](/Documentation/2/2.5.md)
 - [2.6 - Scene Load System](/Documentation/2/2.6.md)
 - [2.7 - Display System](/Documentation/2/2.7.md)
-- 2.8 - Pool System
+- [2.8 - Pool System](/Documentation/2/2.8.md)
 - 2.9 - Mixer System
 
 > **SECTION 3 - GENERIC SCRIPTS**
