@@ -11,19 +11,19 @@ namespace Reign.Generic.UI
         {
             if (string.IsNullOrEmpty(Key))
             {
-                Debug.LogWarning("Key cannot be validated if null or empty.");
-                return;
+                Debug.LogWarning($"Ensure the key of {this} is not empty. The UIManager will not be able to detect it.");
             }
-            
-            var foundManager = GetComponentInParent<UIManager>();
-            if (Manager != foundManager)
+
+            var attempt = GetComponentInParent<UIManager>();
+
+            if (attempt != null)
             {
-                Manager?.Unregister(this);
-
-                Manager = foundManager;
-
-                // Ensure the correct order by using foundManager, even after setting the current manager.
-                foundManager?.Register(this);
+                // Only update given that we NEED to.
+                if (Manager != attempt) Manager = attempt;
+            }
+            else
+            {
+                Debug.LogWarning($"UIManager in parent object of {gameObject.name} could not be found.");
             }
         }
 

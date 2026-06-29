@@ -27,10 +27,6 @@ namespace Reign.Generic.UI
             {
                 lookupTable.Add(newElement.Key, newElement);
             }
-            else
-            {
-                Debug.LogWarning($"Duplicate key by the name '{newElement.Key}' exists in lookup.");
-            }
         }
 
         public void Unregister(UIElement element)
