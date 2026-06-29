@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 namespace Reign
 {
@@ -17,6 +18,22 @@ namespace Reign
         private void Awake()
         {
             CurrentGameCertificates = gameCertifciates;
+        }
+
+        private void Update()
+        {
+            if (gameCertifciates.ALLOW_HOT_RELOAD && InputSystem.Instance.GetButton("HotReload"))
+            {
+                ReloadCurrentScene();
+            }
+        }
+
+        /// <summary>
+        /// Reload current active scene from scene manager
+        /// </summary>
+        public async void ReloadCurrentScene()
+        {
+            await SceneLoadSystem.Instance.LoadSceneAsync(SceneLoadSystem.Instance.CurrentScene());
         }
 
         /// <summary>

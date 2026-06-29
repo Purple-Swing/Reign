@@ -197,7 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
-  log: 0
   gameCertifciates: {fileID: 11400000, guid: 021dd5a5541414e7f8af3ebb08ef12e1, type: 2}
 --- !u!1 &8904663793570437277
 GameObject:

@@ -25,7 +25,7 @@ namespace Reign.Essentials
         private async Task Splash()
         {
             await listener.AwaitStopPlaying();
-            await SceneLoadSystem.Instance.LoadScene(sceneDirectory);
+            await SceneLoadSystem.Instance.LoadSceneAsync(sceneDirectory);
         }
     }
 }

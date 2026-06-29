@@ -13,6 +13,7 @@ namespace Reign.Generic
         public string VERSION = "1.0";
         public List<string> AUTHORS = new();
         public bool IS_DEBUG = true;
+        public bool ALLOW_HOT_RELOAD = false;
 
         [Header("Save System")]
         public bool SAVE_SYSTEM_ENABLED = true;

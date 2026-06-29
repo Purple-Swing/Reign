@@ -188,6 +188,8 @@ GameObject:
   - component: {fileID: 566136767}
   - component: {fileID: 566136766}
   - component: {fileID: 566136765}
+  - component: {fileID: 566136769}
+  - component: {fileID: 566136770}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -279,6 +281,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &566136769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566136764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be156f4175f91f7479008d9105062b9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::Reign.Generic.UI.UIManager
+  elements:
+  - {fileID: 680127895}
+--- !u!114 &566136770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566136764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13bb8f2c4ca5c9a439b3cf55c0b1c201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::Reign.Internal.Internal_UITest
+  UI: {fileID: 566136769}
 --- !u!1 &680127891
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,6 +317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 680127892}
+  - component: {fileID: 680127895}
   - component: {fileID: 680127894}
   - component: {fileID: 680127893}
   m_Layer: 5
@@ -416,6 +446,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680127891}
   m_CullTransparentMesh: 1
+--- !u!114 &680127895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680127891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1417ed3167ff75c41ba1fe4c9467d1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::Reign.Generic.UI.Subclasses.UITextElement
+  Key: Text.CopyrightText
+  textElement: {fileID: 680127893}
 --- !u!1 &1207834973
 GameObject:
   m_ObjectHideFlags: 0

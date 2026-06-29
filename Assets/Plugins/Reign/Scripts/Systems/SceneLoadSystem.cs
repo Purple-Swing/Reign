@@ -38,11 +38,11 @@ namespace Reign.Systems
         /// <summary>
         /// Load scene by name asynchronously
         /// </summary>
-        private Task<bool> LoadSceneAsync(string name)
+        private Task<bool> LoadSceneAsync(string name, LoadSceneMode mode)
         {
             var completionSource = new TaskCompletionSource<bool>();
 
-            SceneManager.LoadSceneAsync(name).completed += _ =>
+            SceneManager.LoadSceneAsync(name, mode).completed += _ =>
             {
                 completionSource.SetResult(true);
             };
@@ -53,16 +53,21 @@ namespace Reign.Systems
         /// <summary>
         /// Transition and await asynchronous scene load
         /// </summary>
-        public async Task LoadScene(string name, float transitionSpeed = 1.0f)
+        public async Task LoadSceneAsync(string name, float transitionSpeed = 1.0f, LoadSceneMode mode = LoadSceneMode.Single)
         {
             // Fade in
             await TransitionAsync(true, transitionSpeed);
 
             // Await load
-            await LoadSceneAsync(name);
+            await LoadSceneAsync(name, mode);
 
             // Fade out
             await TransitionAsync(false, transitionSpeed);
+        }
+
+        public string CurrentScene()
+        {
+            return SceneManager.GetActiveScene().name;
         }
     }
 }
