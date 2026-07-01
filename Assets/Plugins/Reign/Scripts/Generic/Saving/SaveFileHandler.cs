@@ -24,9 +24,7 @@ namespace Reign.Generic.Saving
         /// <summary>
         /// Save asynchronously by writing all bytes to the save path
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns>Awaitable task</returns>
-        internal async Task<bool> SaveAsync(GameData data)
+        public async Task<bool> SaveAsync(GameData data)
         {
             try
             {
@@ -54,8 +52,7 @@ namespace Reign.Generic.Saving
         /// <summary>
         /// Alternative to SaveAsync() where it is instead synchronous
         /// </summary>
-        /// <param name="data"></param>
-        internal void SaveSync(GameData data)
+        public void SaveSync(GameData data)
         {
             try
             {
@@ -80,8 +77,7 @@ namespace Reign.Generic.Saving
         /// <summary>
         /// Load asynchronously from the save path
         /// </summary>
-        /// <returns>Awaitable task</returns>
-        internal async Task<GameData> LoadAsync()
+        public async Task<GameData> LoadAsync()
         {
             // Async load, create new data if the file is missing
 
@@ -125,8 +121,6 @@ namespace Reign.Generic.Saving
         /// <summary>
         /// Encrypt plaintext using GameCertificates' password and salt
         /// </summary>
-        /// <param name="plaintext"></param>
-        /// <returns>Byte array</returns>
         private byte[] Encrypt(string plaintext)
         {
             using Aes aes = Aes.Create();
@@ -160,8 +154,6 @@ namespace Reign.Generic.Saving
         /// <summary>
         /// Decrypt byte array back into plaintext using GameCertificates' password and salt
         /// </summary>
-        /// <param name="cipher"></param>
-        /// <returns>Plaintext string</returns>
         private string Decrypt(byte[] cipher)
         {
             using Aes aes = Aes.Create();

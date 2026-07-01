@@ -2,10 +2,12 @@ using UnityEngine;
 
 namespace Reign.Generic.UI
 {
+    [RequireComponent(typeof(RectTransform))]
     public abstract class UIElement : MonoBehaviour
     {
         public UIManager Manager {get; private set;}
         public string Key;
+        public RectTransform rectTransform {get; private set;}
 
         private void OnValidate()
         {
@@ -14,21 +16,23 @@ namespace Reign.Generic.UI
                 Debug.LogWarning($"Ensure the key of {this} is not empty. The UIManager will not be able to detect it.");
             }
 
-            var attempt = GetComponentInParent<UIManager>();
+            var found = GetComponentInParent<UIManager>();
 
-            if (attempt != null)
+            if (found == null) return;
+
+            if (Manager != found)
             {
-                // Only update given that we NEED to.
-                if (Manager != attempt) Manager = attempt;
-            }
-            else
-            {
-                Debug.LogWarning($"UIManager in parent object of {gameObject.name} could not be found.");
+                Manager?.Unregister(this);
+
+                Manager = found;
+    
+                found.Register(this);
             }
         }
 
         protected virtual void Awake()
         {
+            rectTransform = GetComponent<RectTransform>();
             Manager?.Register(this);
         }
 
@@ -37,14 +41,34 @@ namespace Reign.Generic.UI
             Manager?.Unregister(this);
         }
 
+        // These are the methods inherited by all, because every element should have a game object.
+            
+        // These also slightly simplify the verbose nature of a line like:
+        // uiManager.GetElement<UITextElement>("MyText").gameObject.SetActive(false)
+
         public void SetActive(bool active)
         {
-            // This is the only method inherited by all, because every element should have a game object.
-            
-            // Also slightly simplifies the verbose nature of a line like:
-            // uiManager.GetElement<UITextElement>("MyText").gameObject.SetActive(false)
-
             gameObject.SetActive(active);
+        }
+
+        public void SetRotation(Vector3 rotation)
+        {
+            rectTransform.eulerAngles = rotation;
+        }
+
+        public void SetAnchoredPosition(Vector2 anchored)
+        {
+            rectTransform.anchoredPosition = anchored;
+        }
+
+        public void SetSize(Vector2 size)
+        {
+            rectTransform.sizeDelta = size;
+        }
+
+        public void SetPivot(Vector2 pivotPoint)
+        {
+            rectTransform.pivot = pivotPoint;
         }
     }
 }

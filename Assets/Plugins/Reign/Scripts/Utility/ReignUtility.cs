@@ -384,6 +384,14 @@ namespace Reign.Utility
             return $"{seconds / 3600}:{((seconds % 3600) / 60):D2}:{seconds % 60:D2}";
         }
 
+        /// <summary>
+        /// Find the inverse square given the distance
+        /// </summary>
+        public static float InverseSquare(float distance)
+        {
+            return 1/(distance*distance);
+        }
+
 #if UNITY_EDITOR
         /// <summary>
         /// Instantiate a prefab in the Unity Editor 

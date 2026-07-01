@@ -12,6 +12,7 @@ namespace Reign.Generic.Saving
 
         public List<MixerParameter> mixerParameters;
 
+        // The constructor allows default values that act as a fallback when the data doesn't exist.
         public GameData()
         {
             screenResolution = new ScreenSettings(1280, 720, false, true, true);

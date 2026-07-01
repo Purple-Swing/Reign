@@ -4,14 +4,34 @@ using UnityEngine;
 
 namespace Reign.Generic.UI
 {
+    [RequireComponent(typeof(Canvas))]
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private List<UIElement> elements = new();
         private Dictionary<string, UIElement> lookupTable = new();
 
+        private Canvas currentCanvas;
+
         private void Awake()
         {
+            currentCanvas = GetComponent<Canvas>();
+
             Refresh();
+        }
+
+        public void SetSortOrder(int newSortOrder)
+        {
+            currentCanvas.sortingOrder = newSortOrder;
+        }
+
+        public void SetRenderMode(RenderMode mode)
+        {
+            currentCanvas.renderMode = mode;
+        }
+
+        public void SetTargetDisplay(int target)
+        {
+            currentCanvas.targetDisplay = target;
         }
 
         public void Register(UIElement newElement)

@@ -10,7 +10,7 @@ namespace Reign.Essentials
     {
         [SerializeField] private float updateInterval = 0.3f;
         [SerializeField] private bool trackAverage;
-        [SerializeField, Label("GUI (Must have IS_DEBUG)")] private bool gui = true;
+        [SerializeField, Label("GUI")] private bool gui = true;
 
         private readonly List<float> fpsSamples = new();
         private float fps;
