@@ -5,6 +5,7 @@ using Discord;
 using Reign.Generic;
 using System;
 using System.Threading.Tasks;
+using Reign.Events;
 
 namespace Reign.Systems
 {
@@ -34,10 +35,17 @@ namespace Reign.Systems
         public ActivitySecrets activitySecrets;
     }
 
+    public struct OnDiscordStateChangeEvent : IEvent
+    {
+        public DiscordSystemData data;
+        public bool discordConnected;
+    }
+
     public sealed class DiscordSystem : System<DiscordSystem>
     {
         private DiscordSystemData DefaultDiscordSystemData => Reign.CurrentGameCertificates.DEFAULT_DISCORD_RPC_DATA;
 
+        private bool wasConnected;
         public bool CanConnect { get; private set; } = false;
         public bool IsConnected { get; private set; } = false;
         private DiscordSystemData currentDiscordSystemSettings;
@@ -190,6 +198,13 @@ namespace Reign.Systems
                 manager.UpdateActivity(activity, result =>
                 {
                     IsConnected = result == Result.Ok;
+
+                    if (IsConnected != wasConnected)
+                    {
+                        _ = EventBus.Publish(new OnDiscordStateChangeEvent { data = currentDiscordSystemSettings, discordConnected = IsConnected });
+                    }
+
+                    wasConnected = IsConnected;
                 });
             }
             catch (Exception exception)

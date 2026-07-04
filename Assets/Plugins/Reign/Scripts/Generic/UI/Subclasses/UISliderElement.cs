@@ -11,6 +11,11 @@ namespace Reign.Generic.UI.Subclasses
         [SerializeField] private Image backgroundImage;
         private Image fillImage;
 
+        public override void TryTypeSearch()
+        {
+            sliderElement = GetComponent<Slider>();
+        }
+
         private void OnValidate()
         {
             if (sliderElement == null) return;

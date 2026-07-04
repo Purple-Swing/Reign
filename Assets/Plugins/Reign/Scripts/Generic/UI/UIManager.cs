@@ -1,37 +1,49 @@
-using System.Collections.Generic;
+using NaughtyAttributes;
 using Reign.Generic.UI.Subclasses;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Reign.Generic.UI
 {
-    [RequireComponent(typeof(Canvas))]
-    public class UIManager : MonoBehaviour
+    [RequireComponent(typeof(Canvas), typeof(CanvasScaler))]
+    public sealed class UIManager : MonoBehaviour
     {
         [SerializeField] private List<UIElement> elements = new();
         private Dictionary<string, UIElement> lookupTable = new();
 
-        private Canvas currentCanvas;
+        public Canvas CurrentCanvas { get; private set; }
+        public CanvasScaler CurrentcanvasScaler { get; private set; }
 
         private void Awake()
         {
-            currentCanvas = GetComponent<Canvas>();
+            CurrentCanvas = GetComponent<Canvas>();
+            CurrentcanvasScaler = GetComponent<CanvasScaler>();
 
             Refresh();
         }
 
+
+        [Button("Find UI Elements In Children")]
+        public void FindUIElements()
+        {
+            elements = GetComponentsInChildren<UIElement>().ToList();
+        }
+
         public void SetSortOrder(int newSortOrder)
         {
-            currentCanvas.sortingOrder = newSortOrder;
+            CurrentCanvas.sortingOrder = newSortOrder;
         }
 
         public void SetRenderMode(RenderMode mode)
         {
-            currentCanvas.renderMode = mode;
+            CurrentCanvas.renderMode = mode;
         }
 
         public void SetTargetDisplay(int target)
         {
-            currentCanvas.targetDisplay = target;
+            CurrentCanvas.targetDisplay = target;
         }
 
         public void Register(UIElement newElement)

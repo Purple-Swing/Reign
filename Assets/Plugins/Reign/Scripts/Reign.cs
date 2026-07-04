@@ -2,22 +2,28 @@ using Reign.Systems;
 using Reign.Generic;
 using Reign.Generic.Shared;
 using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
-using UnityEngine.SceneManagement;
+using NaughtyAttributes;
+using Reign.Events;
 
 namespace Reign
 {
+    public struct OnReignInitialisedEvent : IEvent 
+    {
+        public GameCertificates currentGameCertificates;
+    }
+
     [DefaultExecutionOrder(-100)]
     public sealed class Reign : Singleton<Reign>
     {
-        [SerializeField] private GameCertificates gameCertifciates;
+        [SerializeField, Expandable] private GameCertificates gameCertifciates;
         public static GameCertificates CurrentGameCertificates { get; private set; }
 
         private void Awake()
         {
             CurrentGameCertificates = gameCertifciates;
+
+            _ = EventBus.Publish(new OnReignInitialisedEvent { currentGameCertificates = CurrentGameCertificates });
         }
 
         private void Update()

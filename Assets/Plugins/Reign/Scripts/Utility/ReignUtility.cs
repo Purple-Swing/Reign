@@ -1,7 +1,9 @@
+using Reign.Generic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Reign.Generic;
+using System.Security.Cryptography;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -390,6 +392,31 @@ namespace Reign.Utility
         public static float InverseSquare(float distance)
         {
             return 1/(distance*distance);
+        }
+
+        /// <summary>
+        /// Create a randomly (intentionally messy and unpredictable) key 
+        /// </summary>
+        public static string GenerateKey(int length = 24)
+        {
+            byte[] bytes = new byte[length];
+            RandomNumberGenerator.Fill(bytes);
+
+            StringBuilder sb = new StringBuilder(bytes.Length * 2);
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                sb.Append(bytes[i].ToString("X2"));
+
+                int r = UnityEngine.Random.Range(0, 10);
+
+                if (r < 2) sb.Append('-');
+                else if (r < 3) sb.Append('_');
+                else if (r == 4) sb.Append((char)UnityEngine.Random.Range(65, 91));
+                else if (r == 5) sb.Append(UnityEngine.Random.Range(0, 10));
+            }
+
+            return sb.ToString().ToLower();
         }
 
 #if UNITY_EDITOR

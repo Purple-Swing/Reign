@@ -3,10 +3,15 @@ using UnityEngine;
 
 namespace Reign.Generic.UI.Subclasses
 {
-    [RequireComponent(typeof(TMP_Text))]
+    [RequireComponent(typeof(TextMeshProUGUI))]
     public class UITextElement : UIElement
     {
-        public TMP_Text textElement;
+        public TextMeshProUGUI textElement;
+
+        public override void TryTypeSearch()
+        {
+            textElement = GetComponent<TextMeshProUGUI>();
+        }
 
         public void SetText(string value)
         {

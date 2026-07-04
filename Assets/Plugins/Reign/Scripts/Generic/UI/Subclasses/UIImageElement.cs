@@ -9,6 +9,11 @@ namespace Reign.Generic.UI.Subclasses
     {
         public Image imageElement;
 
+        public override void TryTypeSearch()
+        {
+            imageElement = GetComponent<Image>();
+        }
+
         public void SetColor(Color color)
         {
             imageElement.color = color;

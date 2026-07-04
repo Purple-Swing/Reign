@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 5032680422019243299}
   - component: {fileID: 1613900902327836828}
   - component: {fileID: 8557099285751241260}
+  - component: {fileID: 3302484521143590446}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -340,6 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::Reign.Systems.MixerSystem
   dontDestroyOnLoad: 0
   logInfo: 0
+  defaultMixerGroup: {fileID: 24300002, guid: 8c1d61f11b0f80a47baa1a0cc9243a06, type: 2}
   mixers:
   - {fileID: 24100000, guid: 8c1d61f11b0f80a47baa1a0cc9243a06, type: 2}
 --- !u!114 &8557099285751241260
@@ -354,5 +356,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b2c000f0005dc4ca8b1d9fe7966110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp-firstpass::Reign.Systems.PoolSystem
+  dontDestroyOnLoad: 0
+  logInfo: 0
+--- !u!114 &3302484521143590446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904663793570437277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757e7bcf20bf23b439c20a45058a6b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::Reign.Systems.UISystem
   dontDestroyOnLoad: 0
   logInfo: 0

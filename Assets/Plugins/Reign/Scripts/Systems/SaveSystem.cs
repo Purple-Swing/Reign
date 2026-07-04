@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Reign.Events;
 using Reign.Generic;
 using Reign.Generic.Saving;
 using Reign.Generic.Visuals;
@@ -13,6 +14,18 @@ using UnityEngine.SceneManagement;
 
 namespace Reign.Systems
 {
+    public struct OnDataLoadedEvent : IEvent 
+    {
+        public GameData loadedData;
+        public List<IDataHandler> presentHandlers;
+    }
+
+    public struct OnDataSavedEvent : IEvent
+    {
+        public GameData savedData;
+        public List<IDataHandler> presentHandlers;
+    }
+
     [DefaultExecutionOrder(-1)]
     public sealed class SaveSystem : System<SaveSystem>
     {
@@ -70,6 +83,8 @@ namespace Reign.Systems
 
             LoadHandlers();
 
+            _ = EventBus.Publish(new OnDataLoadedEvent { loadedData = gameData, presentHandlers = GetDataHandlers() });
+
             Debug.Log("Loaded data successfully");
         }
 
@@ -77,7 +92,7 @@ namespace Reign.Systems
         /// Save game data (asynchronously) to every present data handler
         /// </summary>
         /// <returns></returns>
-        public async Task SaveGameDataAsync()
+        public async Task SaveGameData()
         {
             if (!Reign.CurrentGameCertificates.SAVE_SYSTEM_ENABLED)
             {
@@ -87,28 +102,10 @@ namespace Reign.Systems
 
             // Save to all handlers
             SaveHandlers();
+
+            _ = EventBus.Publish(new OnDataSavedEvent { savedData = gameData, presentHandlers = GetDataHandlers() });
 
             await saveFileHandler.SaveAsync(gameData);
-
-            Debug.Log("Saved data successfully");
-        }
-
-        /// <summary>
-        /// Save game data (synchronously) to every present data handler
-        /// </summary>
-        /// <returns></returns>
-        public void SaveGameDataSync()
-        {
-            if (!Reign.CurrentGameCertificates.SAVE_SYSTEM_ENABLED)
-            {
-                Debug.Log("Data tried to save, but SAVE_SYSTEM_ENABLED flag is false");
-                return;
-            }
-
-            // Save to all handlers
-            SaveHandlers();
-
-            saveFileHandler.SaveSync(gameData);
 
             Debug.Log("Saved data successfully");
         }
@@ -132,7 +129,7 @@ namespace Reign.Systems
         {
             if (Reign.CurrentGameCertificates.SAVE_ON_QUIT)
             {
-                SaveGameDataSync();
+                _ = SaveGameData();
             }
         }
 

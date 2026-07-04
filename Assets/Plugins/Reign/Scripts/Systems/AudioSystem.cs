@@ -1,14 +1,23 @@
-using UnityEngine;
-using Reign.Generic.Saving;
+using Reign.Events;
 using Reign.Generic.Audio;
-using System.Collections.Generic;
-using System.Collections;
-using UnityEngine.Audio;
+using Reign.Generic.Saving;
 using Reign.Interfaces;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.Audio;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Reign.Systems
 {
+    public struct OnAudioPlayedEvent : IEvent 
+    {
+        public AudioPoolEntry entryData;
+        public Vector3 location;
+        public AudioSource audioSource;
+    }
+
     public sealed class AudioSystem : System<AudioSystem>
     {
         [SerializeField] private AudioPool audioPool;
@@ -93,6 +102,8 @@ namespace Reign.Systems
             SourceSetup(source, entry, pos);
             source.clip = entry.clips[index];
             source.Play();
+
+            _ = EventBus.Publish(new OnAudioPlayedEvent { entryData = entry, location = pos.Value, audioSource = source});
         }
 
         /// <summary>
@@ -105,6 +116,8 @@ namespace Reign.Systems
 
             SourceSetup(source, entry, pos);
             source.PlayOneShot(entry.clips[index]);
+
+            _ = EventBus.Publish(new OnAudioPlayedEvent { entryData = entry, location = pos.Value, audioSource = source });
         }
 
         /// <summary>
@@ -114,6 +127,12 @@ namespace Reign.Systems
         {
             GameObject newSound = new($"Sound Instance ({name})");
             AudioSource source = newSound.AddComponent<AudioSource>();
+
+            if (mixerGroup == null)
+            {
+                mixerGroup = MixerSystem.Instance.defaultMixerGroup;
+            }
+
             source.outputAudioMixerGroup = mixerGroup;
             Play(source, name, pos, index, loop);
 

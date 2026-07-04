@@ -2,9 +2,16 @@ using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using Reign.Events;
 
 namespace Reign.Systems
 {
+    public struct OnNewSceneLoadedEvent : IEvent 
+    {
+        public string sceneName;
+        public int sceneIndex;
+    }
+
     public sealed class SceneLoadSystem : System<SceneLoadSystem>
     {
         [SerializeField] Image loadOverlay;
@@ -60,6 +67,7 @@ namespace Reign.Systems
 
             // Await load
             await LoadSceneAsync(name, mode);
+            _ = EventBus.Publish(new OnNewSceneLoadedEvent { sceneName = name, sceneIndex = SceneManager.GetSceneByName(name).buildIndex });
 
             // Fade out
             await TransitionAsync(false, transitionSpeed);

@@ -4,9 +4,18 @@ using UnityEngine.InputSystem;
 using Reign.Enums;
 using UnityEngine.InputSystem.Controls;
 using System.Collections.Generic;
+using Reign.Events;
 
 namespace Reign.Systems
 {
+    public struct OnInputEvent : IEvent 
+    {
+        public InputAction inputAction;
+        public ButtonControl buttonControl;
+        public InputType type;
+        public InputActionMap currentActionMap;
+    }
+
     public class InputSystem : System<InputSystem>
     {
         private InputActionMap currentMap;
@@ -94,9 +103,10 @@ namespace Reign.Systems
 
         private bool IsValid(InputType inputType, ButtonControl action)
         {
+            _ = EventBus.Publish(new OnInputEvent { currentActionMap = currentMap, buttonControl = action, inputAction = null, type = inputType });
             return inputType switch
             {
-                InputType.DEFERRED => false,
+                InputType.DEFERRED => throw new Exception("DEFERRED input types cannot evaluate ButtonControl."),
                 InputType.PRESSED => action.wasPressedThisFrame,
                 InputType.RELEASED => action.wasReleasedThisFrame,
                 InputType.PRESSING => action.isPressed,
@@ -106,6 +116,7 @@ namespace Reign.Systems
 
         private bool IsValid(InputType inputType, InputAction action)
         {
+            _ = EventBus.Publish(new OnInputEvent { currentActionMap = currentMap, buttonControl = null, inputAction = action, type = inputType });
             return inputType switch
             {
                 InputType.DEFERRED => action.WasPerformedThisFrame(),
