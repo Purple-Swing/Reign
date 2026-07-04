@@ -5,7 +5,6 @@
 <h3 align="center">
     © Purple Swing, 2026
 </h3>
-
 <p align="center">
     <a href="/Documentation/Home.md">Documentation</a> | <a href="/LICENSE.md">License</a> | <a href="/CONTRIBUTING.md">Contribution</a>
 </p>
@@ -14,24 +13,26 @@
 
 ### About
 
-Reign is the solution to all problems when starting an ambitious Unity project. Countless systems working asynchronously to perform as well as possible, even on low-end devices, to make creating great games simple.
+Reign — created by [Purple Swing](https://github.com/Purple-Swing) — is a **lightweight and performant** group of systems and assets that aid Unity game development by adding built-in features to speed up development, built without AI. It singlehandedly controls a wide variety of issues stemming from the lacking nature of Unity all in one huge bundle. 
 
-<img src="/GitHub/ReignThumbnail.png" width="800px">
+<img src="/GitHub/ReignThumbnail.png" width="900px">
 
 ---
 
 ### Features
 
 - Expandable cross-platform save file system
-- Easily managable audio system
+- Easily manageable audio system
 - Mixer system that controls audio mixer groups
 - Flexible input system
 - Discord RPC support
 - Scene loading system (including transitions)
-- Built-in utility classes
-- Reign Essentials and Internals
+- Massive built-in utility class
+- UI management and systems
+- Reign Essentials and Internal scripts
 - Asynchronous Event Bus and Query Bus
 - Object pooling
+- Generic fonts included by default ([Credited here](/LICENSE.md#used-resources))
 - [DOTween (Free)](https://dotween.demigiant.com/) by Demigiant
 <br>and much more...
 

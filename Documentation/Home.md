@@ -34,14 +34,17 @@ Every list element that is not a link is a topic that has not been finished.
 - [2.6 - Scene Load System](/Documentation/2/2.6.md)
 - [2.7 - Display System](/Documentation/2/2.7.md)
 - [2.8 - Pool System](/Documentation/2/2.8.md)
-- 2.9 - Mixer System
+- [2.9 - Mixer System](/Documentation/2/2.9.md)
+- [2.10 - UI System](/Documentation/2/2.10.md)
 
 > **SECTION 3 - GENERIC SCRIPTS**
-- 3.1 - Splash Screen
-- 3.2 - Game Certificates
+- 3.1 - Game Certificates
+- 3.2 - Splash Screen
 - 3.3 - Singletons
-- 3.4 - IDataHandler
-- 3.5 - Asset Library
+- 3.4 - Reign Utility
+- 3.5 - IDataHandler
+- 3.6 - Asset Library
+- 3.7 - UI Managers & UI Elements
 
 > **SECTION 4 - USAGE + TUTORIALS**
 - 4.1 - How to Audio Pool
@@ -51,5 +54,4 @@ Every list element that is not a link is a topic that has not been finished.
 - 4.5 - Setting Up Discord Rich Presence
 - 4.6 - Using Asset Libraries Efficiently
 - 4.7 - Utilizing the Event and Query Bus
-
 <br>
