@@ -6,7 +6,7 @@
     © Purple Swing, 2026
 </h3>
 <p align="center">
-    <a href="/Documentation/Home.md">Documentation</a> | <a href="/LICENSE.md">License</a> | <a href="/CONTRIBUTING.md">Contribution</a>
+    <a href="https://github.com/Purple-Swing/Reign/wiki">Documentation</a> | <a href="/LICENSE.md">License</a> | <a href="/CONTRIBUTING.md">Contribution</a>
 </p>
 
 ---
@@ -39,7 +39,7 @@ Reign — created by [Purple Swing](https://github.com/Purple-Swing) — is a **
 ---
 
 ### Documentation
-[Documentation](/Documentation/Home.md) is still being created and finalised, but as Reign straightens out: we will continue to make corrections and changes. 
+[Documentation](https://github.com/Purple-Swing/Reign/wiki) is still being created and finalised, but as Reign straightens out: we will continue to make corrections and changes. 
 
 ---
 
