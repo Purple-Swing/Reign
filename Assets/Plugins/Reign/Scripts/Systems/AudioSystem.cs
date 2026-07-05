@@ -14,7 +14,7 @@ namespace Reign.Systems
     public struct OnAudioPlayedEvent : IEvent 
     {
         public AudioPoolEntry entryData;
-        public Vector3 location;
+        public Vector3? location;
         public AudioSource audioSource;
     }
 
@@ -103,7 +103,7 @@ namespace Reign.Systems
             source.clip = entry.clips[index];
             source.Play();
 
-            _ = EventBus.Publish(new OnAudioPlayedEvent { entryData = entry, location = pos.Value, audioSource = source});
+            _ = EventBus.Publish(new OnAudioPlayedEvent { entryData = entry, location = pos, audioSource = source});
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Reign.Systems
             SourceSetup(source, entry, pos);
             source.PlayOneShot(entry.clips[index]);
 
-            _ = EventBus.Publish(new OnAudioPlayedEvent { entryData = entry, location = pos.Value, audioSource = source });
+            _ = EventBus.Publish(new OnAudioPlayedEvent { entryData = entry, location = pos, audioSource = source });
         }
 
         /// <summary>
