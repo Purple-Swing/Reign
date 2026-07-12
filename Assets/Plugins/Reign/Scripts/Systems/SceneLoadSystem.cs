@@ -14,6 +14,12 @@ namespace Reign.Systems
 
     public sealed class SceneLoadSystem : System<SceneLoadSystem>
     {
+        private enum FadeDirection
+        {
+            IN,
+            OUT
+        }
+
         [SerializeField] Image loadOverlay;
 
         private void Start()
@@ -24,9 +30,9 @@ namespace Reign.Systems
         /// <summary>
         /// Transition the load overlay image in or out
         /// </summary>
-        private async Task TransitionAsync(bool isIn, float speed = 1.0f)
+        private async Task TransitionAsync(FadeDirection fadeDirection, float speed = 1.0f)
         {
-            float target = isIn ? 1f : 0f;
+            float target = fadeDirection == FadeDirection.IN ? 1f : 0f;
 
             Color color = loadOverlay.color;
 
@@ -36,7 +42,7 @@ namespace Reign.Systems
 
                 color = loadOverlay.color;
 
-                float newAlpha = Mathf.MoveTowards(color.a, target, Time.deltaTime * speed);
+                float newAlpha = Mathf.MoveTowards(color.a, target, Time.unscaledDeltaTime * speed);
 
                 loadOverlay.color = new Color(color.r, color.g, color.b, newAlpha);
             }
@@ -63,14 +69,14 @@ namespace Reign.Systems
         public async Task LoadSceneAsync(string name, float transitionSpeed = 1.0f, LoadSceneMode mode = LoadSceneMode.Single)
         {
             // Fade in
-            await TransitionAsync(true, transitionSpeed);
+            await TransitionAsync(FadeDirection.IN, transitionSpeed);
 
             // Await load
             await LoadSceneAsync(name, mode);
             _ = EventBus.Publish(new OnNewSceneLoadedEvent { sceneName = name, sceneIndex = SceneManager.GetSceneByName(name).buildIndex });
 
             // Fade out
-            await TransitionAsync(false, transitionSpeed);
+            await TransitionAsync(FadeDirection.OUT, transitionSpeed);
         }
 
         public string CurrentScene()

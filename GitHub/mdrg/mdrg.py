@@ -1,10 +1,12 @@
 import os
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+RELEASES_DIR = os.path.join(SCRIPT_DIR, "releases")
 
 def markdownReleaseGenerator():
     title:str = str(input("Release title (RELEASE.MAJOR.MINOR.PATCH): "))
     
-    if os.path.exists(f"GitHub/mdrg/releases/{title}.md"):
+    if os.path.exists(os.path.join(RELEASES_DIR, f"{title}.md")):
         print("Cannot create a new file with the name of an existing file.")
         return 
 
@@ -20,9 +22,9 @@ def markdownReleaseGenerator():
         
         changes.append(change)
 
-    os.makedirs("GitHub/mdrg/releases", exist_ok=True)
+    os.makedirs(RELEASES_DIR, exist_ok=True)
 
-    with open(f"GitHub/mdrg/releases/{title}.md", "x") as file:
+    with open(os.path.join(RELEASES_DIR, f"{title}.md"), "x") as file:
         finalText:str = f"# Changelog | v{title}\n";
 
         for singular_change in changes:
@@ -30,6 +32,6 @@ def markdownReleaseGenerator():
         
         file.write(finalText)
 
-    print(f"File '{title}.md' created in releases/")
+    print(f"File '{title}.md' created in {RELEASES_DIR}")
 
 markdownReleaseGenerator()
