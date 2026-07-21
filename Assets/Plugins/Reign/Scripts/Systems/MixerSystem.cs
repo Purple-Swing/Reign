@@ -10,7 +10,6 @@ namespace Reign.Systems
 {
     public sealed class MixerSystem : System<MixerSystem>, IDataHandler
     {
-        public AudioMixerGroup defaultMixerGroup;
         [SerializeField] private List<AudioMixer> mixers;
 
         public AudioMixer GetMixerByName(string name)

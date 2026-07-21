@@ -1,5 +1,6 @@
 using NaughtyAttributes;
 using Reign.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,27 +9,27 @@ namespace Reign.Essentials
     [RequireComponent(typeof(BoxCollider))]
     public class BoxTrigger : MonoBehaviour
     {
-        public BoxCollider colliderReference { get; private set; }
-        public Collider lastInteracted { get; private set; }
+        public BoxCollider ColliderReference { get; private set; }
+        public Collider LastInteracted { get; private set; }
         public bool triggerEnabled = true;
 
         [SerializeField, Tag] string searchTag;
-        [SerializeField] private UnityEvent onEnter;
-        [SerializeField] private UnityEvent onExit;
+        public event Action OnTriggerEntered;
+        public event Action OnTriggerExited;
 
         private void Awake()
         {
-            colliderReference = GetComponent<BoxCollider>();
+            ColliderReference = GetComponent<BoxCollider>();
 
-            if (colliderReference != null) colliderReference.isTrigger = true;
+            if (ColliderReference != null) ColliderReference.isTrigger = true;
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (triggerEnabled && (other.CompareTag(searchTag) || string.IsNullOrEmpty(searchTag)))
             {
-                lastInteracted = other;
-                onEnter?.Invoke();
+                LastInteracted = other;
+                OnTriggerEntered?.Invoke();
             }
         }
 
@@ -36,14 +37,14 @@ namespace Reign.Essentials
         {
             if (triggerEnabled && (other.CompareTag(searchTag) || string.IsNullOrEmpty(searchTag)))
             {
-                lastInteracted = other;
-                onExit?.Invoke();
+                LastInteracted = other;
+                OnTriggerExited?.Invoke();
             }
         }
 
         private void OnDestroy()
         {
-            onExit?.Invoke();
+            OnTriggerExited?.Invoke();
         }
 
         public void EnableTrigger() => triggerEnabled = true;

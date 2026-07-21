@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Reign.Generic
@@ -10,15 +11,12 @@ namespace Reign.Generic
         //                                                                                                      //
         // ---------------------------------------------------------------------------------------------------- //
 
-        public const string REIGN_VERSION = "1.0.3.3";                                  // Version
-        public const string RELEASE_DATE = "2026-07-17";                                // YYYY-MM-DD Format
-        public static readonly ReadOnlyCollection<string> CONTRIBUTORS = new            // Contributors to Reign since conception
-        (
-            new[]
-            {
-                "Tureen"
-            }
-        );
+        public const string REIGN_VERSION = "1.0.3.4";                                  // Version
+        public const string RELEASE_DATE = "2026-07-22";                                // YYYY-MM-DD Format
+        public static readonly Dictionary<string, string> CONTRIBUTORS = new()
+        {
+            { "Tureen", "[Reign Lead] Programmer, artist, documentation, etc." }
+        };
 
         public const string REIGN_TOOLS_VERSION = "1.1.0";                              // Version of Reign Tools (Reign/Reign Tools in the editor)
     }

@@ -9,7 +9,7 @@ namespace Reign.Essentials
     {
         VideoPlayer player;
 
-        void Awake()
+        private void Awake()
         {
             player = GetComponent<VideoPlayer>();
         }
@@ -24,6 +24,8 @@ namespace Reign.Essentials
 
         public Task AwaitStopPlaying()
         {
+            if (player.isLooping) throw new TaskCanceledException("Cannot await end of playing if the video player is looping.");
+            
             var tcs = new TaskCompletionSource<bool>();
 
             player.loopPointReached += _ => tcs.SetResult(true);

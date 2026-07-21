@@ -14,7 +14,7 @@ namespace Reign.Internal
         {
             if (!isEnabled) return;
 
-            var uiMan = UISystem.Instance.CreateUIManager(out Canvas canvas, new(1280, 720));
+            UISystem.Instance.CreateUIManager(out Canvas canvas, new(1280, 720));
 
             var newElement = UISystem.Instance.CreateUIElement<UITextElement>("NewUIElement", canvas);
             newElement.SetText("Hello! I am created via script...");

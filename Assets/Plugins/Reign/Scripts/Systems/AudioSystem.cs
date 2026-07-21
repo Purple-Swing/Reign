@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Reign.Systems
 {
@@ -80,6 +79,11 @@ namespace Reign.Systems
 
             if (pos.HasValue)
             {
+                source.minDistance = entry.minDistance;
+                source.maxDistance = entry.maxDistance;
+                source.dopplerLevel = entry.dopplerLevel;
+                source.rolloffMode = entry.audioRolloffMode;
+
                 source.spatialBlend = entry.spatialBlend != 0.0f ? entry.spatialBlend : 1.0f;
                 source.transform.position = pos.Value;
             }
@@ -123,15 +127,12 @@ namespace Reign.Systems
         /// <summary>
         /// Create a new GameObject with an audio source and play the audio pool entry with the same name
         /// </summary>
-        public AudioSource PlayCreateInstance(string name, Vector3? pos, AudioMixerGroup mixerGroup, int index = 0, bool loop = false, bool destroyOnComplete = true)
+        public AudioSource PlayCreateInstance(string name, Vector3? pos, string mixerName, int index = 0, bool loop = false, bool destroyOnComplete = true)
         {
             GameObject newSound = new($"Sound Instance ({name})");
             AudioSource source = newSound.AddComponent<AudioSource>();
 
-            if (mixerGroup == null)
-            {
-                mixerGroup = MixerSystem.Instance.defaultMixerGroup;
-            }
+            var mixerGroup = MixerSystem.Instance.GetMixerByName(mixerName).outputAudioMixerGroup;
 
             source.outputAudioMixerGroup = mixerGroup;
             Play(source, name, pos, index, loop);
@@ -151,10 +152,7 @@ namespace Reign.Systems
                 await Task.Yield();
             }
 
-            if (source != null)
-            {
-                Destroy(source.gameObject);
-            }
+            if (source != null) Destroy(source.gameObject);
         }
     }
 }

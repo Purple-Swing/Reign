@@ -182,6 +182,7 @@ namespace Reign.Generic.Saving
 
             return reader.ReadToEnd();
         }
+
         #endregion
     }
 }

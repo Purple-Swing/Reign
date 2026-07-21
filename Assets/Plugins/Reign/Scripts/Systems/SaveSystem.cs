@@ -36,38 +36,43 @@ namespace Reign.Systems
         /// <summary>
         /// Return a list of the present data handlers in the scene
         /// </summary>
-        /// <returns></returns>
         public static List<IDataHandler> GetDataHandlers()
         {
             // Start from MonoBehaviour and not ReignMonoBehaviour because that inherits MonoBehaviour
             return FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include).OfType<IDataHandler>().ToList();
         }
 
-        private void RefreshHandlers()
+        /// <summary>
+        /// Refresh list of active IDataHandlers
+        /// </summary>
+        public void RefreshHandlers()
         {
             dataHandlers = GetDataHandlers();
         }
 
-        private void LoadHandlers()
+        private List<IDataHandler> LoadHandlers()
         {
             foreach (var handler in dataHandlers)
             {
                 handler.LoadData(gameData);
             }
+
+            return dataHandlers;
         }
 
-        private void SaveHandlers()
+        private List<IDataHandler> SaveHandlers()
         {
             foreach (var handler in dataHandlers)
             {
                 handler.SaveData(ref gameData);
             }
+
+            return dataHandlers;
         }
 
         /// <summary>
         /// Load game data (asynchronously) in every present data handler
         /// </summary>
-        /// <returns></returns>
         public async Task LoadGameData()
         {
             if (!Reign.CurrentGameCertificates.SAVE_SYSTEM_ENABLED)
@@ -81,9 +86,9 @@ namespace Reign.Systems
             // Fallback
             gameData ??= new GameData();
 
-            LoadHandlers();
+            var present = LoadHandlers();
 
-            _ = EventBus.Publish(new OnDataLoadedEvent { loadedData = gameData, presentHandlers = GetDataHandlers() });
+            _ = EventBus.Publish(new OnDataLoadedEvent { loadedData = gameData, presentHandlers = present });
 
             Debug.Log("Loaded data successfully");
         }
@@ -91,7 +96,6 @@ namespace Reign.Systems
         /// <summary>
         /// Save game data (asynchronously) to every present data handler
         /// </summary>
-        /// <returns></returns>
         public async Task SaveGameData()
         {
             if (!Reign.CurrentGameCertificates.SAVE_SYSTEM_ENABLED)
@@ -101,9 +105,9 @@ namespace Reign.Systems
             }
 
             // Save to all handlers
-            SaveHandlers();
+            var present = SaveHandlers();
 
-            _ = EventBus.Publish(new OnDataSavedEvent { savedData = gameData, presentHandlers = GetDataHandlers() });
+            _ = EventBus.Publish(new OnDataSavedEvent { savedData = gameData, presentHandlers = present });
 
             await saveFileHandler.SaveAsync(gameData);
 

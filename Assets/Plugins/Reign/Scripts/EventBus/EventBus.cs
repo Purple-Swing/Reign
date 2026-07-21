@@ -15,8 +15,6 @@ namespace Reign.Events
         /// <summary>
         /// Subscribe an async handler to an event
         /// </summary>
-        /// <typeparam name="T">Event type</typeparam>
-        /// <param name="handler">Handler to execute when event published</param>
         public static void Subscribe<T>(Func<T, Task> handler) where T : IEvent
         {
             var type = typeof(T);
@@ -35,8 +33,6 @@ namespace Reign.Events
         /// <summary>
         /// Unsubscribe from async handler
         /// </summary>
-        /// <typeparam name="T">Event type</typeparam>
-        /// <param name="handler">Handler to unsubscribe from</param>
         public static void Unsubscribe<T>(Func<T, Task> handler) where T : IEvent
         {
             var type = typeof(T);
@@ -53,10 +49,6 @@ namespace Reign.Events
         /// <summary>
         /// Invoke an event of type T safely
         /// </summary>
-        /// <typeparam name="T">Event type</typeparam>
-        /// <param name="_event">Message to broadcast</param>
-        /// <param name="parallel">If the execution should be parallel or sequential</param>
-        /// <returns>Async publish operation.</returns>
         public static async Task Publish<T>(T _event, bool parallel = true) where T : IEvent
         {
             var type = typeof(T);
@@ -92,10 +84,6 @@ namespace Reign.Events
         /// <summary>
         /// Wrapper to safely invoke an event
         /// </summary>
-        /// <typeparam name="T">Event type</typeparam>
-        /// <param name="handler">Subscriber function</param>
-        /// <param name="_event">Event data</param>
-        /// <returns>Async invoke operation.</returns>
         private static async Task SafeInvoke<T>(Func<T, Task> handler, T _event)
         {
             try
@@ -112,7 +100,7 @@ namespace Reign.Events
         /// <summary>
         /// Clear all subscribers
         /// </summary>
-        internal static void ClearAllSubscribers()
+        public static void ClearAllSubscribers()
         {
             _subscribers.Clear();
         }
@@ -120,8 +108,7 @@ namespace Reign.Events
         /// <summary>
         /// Clear subscribers of a specific event type
         /// </summary>
-        /// <typeparam name="T">Event type</typeparam>
-        internal static void ClearSubscribersOfType<T>() where T : IEvent
+        public static void ClearSubscribersOfType<T>() where T : IEvent
         {
             _subscribers.TryRemove(typeof(T), out _);
         }

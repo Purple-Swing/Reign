@@ -1,5 +1,6 @@
 using Reign.Generic;
 using Reign.Utility;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -26,11 +27,11 @@ namespace Reign.Editor
             {
                 if (i <= 0)
                 {
-                    contributors += $"{ReignServiceDetails.CONTRIBUTORS[i]}";
+                    contributors += $"{ReignServiceDetails.CONTRIBUTORS.ElementAt(i)}";
                 }
                 else
                 {
-                    contributors += $", {ReignServiceDetails.CONTRIBUTORS[i]}";
+                    contributors += $", {ReignServiceDetails.CONTRIBUTORS.ElementAt(i)}";
                 }
             }
 

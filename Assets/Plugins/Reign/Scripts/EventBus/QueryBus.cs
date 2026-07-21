@@ -7,7 +7,6 @@ namespace Reign.Events
     /// <summary>
     /// Define query and expected return type
     /// </summary>
-    /// <typeparam name="TResponse">Type for the query to return</typeparam>
     public interface IQuery<TResponse> { }
 
     public static class QueryBus
