@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Reign.Generic
 {
@@ -11,8 +10,8 @@ namespace Reign.Generic
         //                                                                                                      //
         // ---------------------------------------------------------------------------------------------------- //
 
-        public const string REIGN_VERSION = "1.0.3.4";                                  // Version
-        public const string RELEASE_DATE = "2026-07-22";                                // YYYY-MM-DD Format
+        public const string REIGN_VERSION = "1.0.4.0";                                  // Version
+        public const string RELEASE_DATE = "2026-07-23";                                // YYYY-MM-DD Format
         public static readonly Dictionary<string, string> CONTRIBUTORS = new()
         {
             { "Tureen", "[Reign Lead] Programmer, artist, documentation, etc." }
