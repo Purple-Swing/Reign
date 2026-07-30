@@ -10,7 +10,7 @@ using UnityEngine.Audio;
 
 namespace Reign.Systems
 {
-    public struct OnAudioPlayedEvent : IEvent 
+    public struct OnAudioPlayedEvent : IEvent
     {
         public AudioPoolEntry entryData;
         public Vector3? location;
@@ -23,6 +23,16 @@ namespace Reign.Systems
         private readonly Dictionary<string, AudioPoolEntry> audioEntries = new();
 
         public void OnValidate()
+        {
+            RefreshEntries();
+        }
+
+        private void Awake()
+        {
+            RefreshEntries();
+        }
+
+        private void RefreshEntries()
         {
             if (audioPool == null || audioEntries == null) return;
 
@@ -61,9 +71,9 @@ namespace Reign.Systems
         {
             var entry = GetEntry(entryName);
 
-            if (entry.clips.Length == 0)
+            if (entry == null || entry.clips == null || entry.clips.Length == 0)
             {
-                return entry.clips[0];
+                return null;
             }
 
             return entry.clips[Random.Range(0, entry.clips.Length)];
@@ -107,7 +117,7 @@ namespace Reign.Systems
             source.clip = entry.clips[index];
             source.Play();
 
-            _ = EventBus.Publish(new OnAudioPlayedEvent { entryData = entry, location = pos, audioSource = source});
+            _ = EventBus.Publish(new OnAudioPlayedEvent { entryData = entry, location = pos, audioSource = source });
         }
 
         /// <summary>

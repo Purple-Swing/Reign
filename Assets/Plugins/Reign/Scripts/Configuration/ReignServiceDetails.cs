@@ -10,8 +10,8 @@ namespace Reign.Generic
         //                                                                                                      //
         // ---------------------------------------------------------------------------------------------------- //
 
-        public const string REIGN_VERSION = "1.0.4.0";                                  // Version
-        public const string RELEASE_DATE = "2026-07-23";                                // YYYY-MM-DD Format
+        public const string REIGN_VERSION = "1.0.4.1";                                  // Version
+        public const string RELEASE_DATE = "2026-07-30";                                // YYYY-MM-DD Format
         public static readonly Dictionary<string, string> CONTRIBUTORS = new()
         {
             { "Tureen", "[Reign Lead] Programmer, artist, documentation, etc." }
