@@ -1,0 +1,13 @@
+{
+    "version": 1,
+    "name": "GlobalInputActionAsset",
+    "maps": [
+        {
+            "name": "Map",
+            "id": "a050a283-1e66-4e8f-9dfe-834275b35a82",
+            "actions": [],
+            "bindings": []
+        }
+    ],
+    "controlSchemes": []
+}

@@ -1,0 +1,13 @@
+- Shaders (Billboard and Tri-planar etc.)
+
+---
+
+[DONE] Discord Manager
+
+[DONE] Reign should go back to being in the Assets/ folder.
+
+[DONE] Reign releases should still be structured so that they give the Assets and Packages.
+
+[DONE] Reign now manages the old "Game Certificates" -> renamed to "Configuration" in one partial static script:
+- Your project's config will be in Assets/ProjectConfiguration/Config.cs
+- Reign's config will be in Assets/Reign/Configuration/Config.cs

@@ -1,0 +1,12 @@
+{
+  "author": "Hourai Teahouse",
+  "name": "com.discord.game-sdk",
+  "displayName": "Discord Game SDK",
+  "version": "3.1.0",
+  "description": "Discord Game SDK for Unity.",
+  "homepage": "https://discordapp.com/developers/docs/game-sdk/sdk-starter-guide",
+  "publishConfig": {
+    "registry": "https://upm.houraiteahouse.net"
+  },
+  "_fingerprint": "ab78a1070e82c8c1361d152bab2330de02ee9619"
+}
