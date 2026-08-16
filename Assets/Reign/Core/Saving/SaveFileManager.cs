@@ -3,12 +3,10 @@ using Reign.API.Saving;
 using Reign.Configuration;
 using System;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using static UnityEditor.ShaderData;
 
 namespace Reign.Core.Saving
 {
@@ -20,17 +18,44 @@ namespace Reign.Core.Saving
         private byte[] salt;
         private uint iter;
 
+        private const string HeaderEnd = "\n\n";
+
         public SaveFileManager()
         {
             encrypt = Config.Project.ENCRYPTED_SAVES;
-            savePath = Path.Combine(Application.persistentDataPath, Config.Project.SAVE_FILE_NAME);
-            
+            savePath = Path.Combine(
+                Application.persistentDataPath,
+                Config.Project.SAVE_FILE_NAME
+            );
+
             if (encrypt)
             {
                 pass = Encoding.UTF8.GetBytes(Config.Project.SAVE_FILE_PASSWORD);
                 salt = Encoding.UTF8.GetBytes(Config.Project.SAVE_FILE_SALT);
                 iter = Config.Project.SAVE_ENCRYPTION_ITERATIONS;
             }
+        }
+
+        private static int FindBytes(byte[] source, byte[] pattern)
+        {
+            for (int i = 0; i <= source.Length - pattern.Length; i++)
+            {
+                bool match = true;
+
+                for (int j = 0; j < pattern.Length; j++)
+                {
+                    if (source[i + j] != pattern[j])
+                    {
+                        match = false;
+                        break;
+                    }
+                }
+
+                if (match)
+                    return i;
+            }
+
+            return -1;
         }
 
         public async Task<bool> SaveAsync(SaveData data)
@@ -41,24 +66,41 @@ namespace Reign.Core.Saving
 
                 if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
                 {
-                    // If the directory is a valid path but the directory doesn't exist yet, create it.
                     Directory.CreateDirectory(dir);
                 }
 
-                string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+                string json = JsonConvert.SerializeObject(
+                    data,
+                    Formatting.Indented
+                );
 
-                // Create the byte array with an unencrypted heading for the Reign version and project version the save originates from.
-
-                string headingText = $"Reign Version: {Config.Reign.VERSION}\n" + "Project Version: {Config.Project.VERSION}\n\n";
-
-                byte[] fileBytes = encrypt ? Encrypt(json) : Encoding.UTF8.GetBytes(json);
+                string headingText =
+                    $"Reign Version: {Config.Reign.VERSION}\n" +
+                    $"Project Version: {Config.Project.VERSION}\n\n";
 
                 byte[] heading = Encoding.UTF8.GetBytes(headingText);
 
+                byte[] fileBytes = encrypt
+                    ? Encrypt(json)
+                    : Encoding.UTF8.GetBytes(json);
+
                 byte[] output = new byte[heading.Length + fileBytes.Length];
 
-                Buffer.BlockCopy(heading, 0, output, 0, heading.Length);
-                Buffer.BlockCopy(fileBytes, 0, output, heading.Length, fileBytes.Length);
+                Buffer.BlockCopy(
+                    heading,
+                    0,
+                    output,
+                    0,
+                    heading.Length
+                );
+
+                Buffer.BlockCopy(
+                    fileBytes,
+                    0,
+                    output,
+                    heading.Length,
+                    fileBytes.Length
+                );
 
                 await File.WriteAllBytesAsync(savePath, output);
 
@@ -75,8 +117,6 @@ namespace Reign.Core.Saving
         {
             if (!File.Exists(savePath))
             {
-                Debug.Log("Creating new save data at " + savePath);
-
                 SaveData dat = new();
 
                 bool created = await SaveAsync(dat);
@@ -92,8 +132,34 @@ namespace Reign.Core.Saving
 
             try
             {
-                byte[] fileBytes = File.ReadAllBytes(savePath);
-                string json = encrypt ? Decrypt(fileBytes) : Encoding.UTF8.GetString(fileBytes);
+                byte[] fileBytes = await File.ReadAllBytesAsync(savePath);
+
+                byte[] headerEnd = Encoding.UTF8.GetBytes(HeaderEnd);
+
+                int dataStart = FindBytes(fileBytes, headerEnd);
+
+                if (dataStart == -1)
+                {
+                    throw new InvalidDataException(
+                        "Invalid save file: header terminator was not found."
+                    );
+                }
+
+                dataStart += headerEnd.Length;
+
+                byte[] dataBytes = new byte[fileBytes.Length - dataStart];
+
+                Buffer.BlockCopy(
+                    fileBytes,
+                    dataStart,
+                    dataBytes,
+                    0,
+                    dataBytes.Length
+                );
+
+                string json = encrypt
+                    ? Decrypt(dataBytes)
+                    : Encoding.UTF8.GetString(dataBytes);
 
                 SaveData dat = JsonConvert.DeserializeObject<SaveData>(json);
 
@@ -101,7 +167,6 @@ namespace Reign.Core.Saving
             }
             catch (Exception e)
             {
-
                 Debug.LogWarning("Load failed: " + e);
                 return null;
             }
@@ -113,6 +178,7 @@ namespace Reign.Core.Saving
 
             aes.KeySize = 256;
             aes.BlockSize = 128;
+            aes.Padding = PaddingMode.PKCS7;
 
             using var key = new Rfc2898DeriveBytes(
                 pass,
@@ -128,8 +194,13 @@ namespace Reign.Core.Saving
 
             memStream.Write(aes.IV, 0, aes.IV.Length);
 
-            using (CryptoStream cryptoStream = new(memStream, aes.CreateEncryptor(), CryptoStreamMode.Write))
-            using (StreamWriter writer = new(cryptoStream))
+            using (CryptoStream cryptoStream = new(
+                memStream,
+                aes.CreateEncryptor(),
+                CryptoStreamMode.Write))
+            using (StreamWriter writer = new(
+                cryptoStream,
+                new UTF8Encoding(false)))
             {
                 writer.Write(plaintext);
             }
@@ -143,28 +214,51 @@ namespace Reign.Core.Saving
 
             aes.KeySize = 256;
             aes.BlockSize = 128;
+            aes.Padding = PaddingMode.PKCS7;
 
             using var key = new Rfc2898DeriveBytes(
                 pass,
                 salt,
-                (int)Mathf.Abs(iter),
+                Mathf.FloorToInt(Mathf.Abs(iter)),
                 HashAlgorithmName.SHA256
             );
 
             aes.Key = key.GetBytes(32);
 
+            if (cipher.Length < aes.BlockSize / 8)
+            {
+                throw new InvalidDataException(
+                    "Encrypted save is too small to contain an IV."
+                );
+            }
+
             using MemoryStream memStream = new(cipher);
 
-            byte[] iv = new byte[16];
-            memStream.Read(iv, 0, iv.Length);
+            byte[] iv = new byte[aes.BlockSize / 8];
+
+            int bytesRead = memStream.Read(iv, 0, iv.Length);
+
+            if (bytesRead != iv.Length)
+            {
+                throw new InvalidDataException(
+                    "Could not read the complete AES IV."
+                );
+            }
 
             aes.IV = iv;
 
-            using CryptoStream cryptoStream = new(memStream, aes.CreateDecryptor(), CryptoStreamMode.Read);
-            using StreamReader reader = new(cryptoStream);
+            using CryptoStream cryptoStream = new(
+                memStream,
+                aes.CreateDecryptor(),
+                CryptoStreamMode.Read
+            );
+
+            using StreamReader reader = new(
+                cryptoStream,
+                new UTF8Encoding(false)
+            );
 
             return reader.ReadToEnd();
         }
-
     }
 }

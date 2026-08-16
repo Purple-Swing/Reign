@@ -10,6 +10,23 @@ namespace Reign.Core.Input
     {
         public static InputActionMap Map { get; private set; }
         private static readonly Dictionary<string, InputAction> actions = new();
+        public static bool MapEnabled => Map.enabled;
+
+        /// <summary>
+        /// Enable the Input Manager
+        /// </summary>
+        public static void EnableInput()
+        {
+            Map?.Enable();
+        }
+
+        /// <summary>
+        /// Disable the Input Manager
+        /// </summary>
+        public static void DisableInput()
+        {
+            Map?.Disable();
+        }
 
         public static InputAction FindOrAddAction(string name, bool tryAdd = true)
         {
@@ -69,7 +86,7 @@ namespace Reign.Core.Input
         }
 
         /// <summary>
-        /// Refresh the current map with a new input action asset and map name/
+        /// Refresh the current map with a new input action asset and map name.
         /// </summary>
         public static void Refresh(InputActionAsset asset, string name)
         {
@@ -89,16 +106,6 @@ namespace Reign.Core.Input
         public static bool IsActionRegistered(string name)
         {
             return actions.ContainsKey(name);
-        }
-
-        public static void EnableInput()
-        {
-            Map?.Enable();
-        }
-
-        public static void DisableInput()
-        {
-            Map?.Disable();
         }
     }
 }

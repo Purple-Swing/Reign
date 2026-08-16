@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Reign.Core.Generic
 {
+    [DefaultExecutionOrder(-5000)]
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         [SerializeField] private bool destroyOnLoad = true;

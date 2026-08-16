@@ -1,9 +1,35 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Reign.Core.Extensions
 {
     public static class Utility
     {
+        public static async Task WaitUntilDictionaryHasPairs<TKey, TValue>(Dictionary<TKey, TValue> dict)
+        {
+            while (dict.Count <= 0)
+            {
+                await Task.Yield();
+            }
+        }
+
+        public static async Task WaitUntilListHasValues<T>(List<T> list)
+        {
+            while (list.Count <= 0)
+            {
+                await Task.Yield();
+            }
+        }
+
+        public static async Task WaitUntilAudioSourceFinishedPlaying(AudioSource source)
+        {
+            while (source.isPlaying)
+            {
+                await Task.Yield();
+            }
+        }
+
         public static string Color32ToHexString(Color32 col)
         {
             return string.Format("{0:X2}{1:X2}{2:X2}{3:X2}", col.r, col.g, col.b, col.a);

@@ -2,6 +2,7 @@ using Reign.API.Saving;
 using Reign.Configuration;
 using Reign.Core.Audio;
 using Reign.Core.Discord;
+using Reign.Core.Generic;
 using Reign.Core.Input;
 using Reign.Core.Saving;
 using UnityEngine;
@@ -10,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 namespace Reign.Core.InstanceRequired
 {
-    public class Bootstrapper : MonoBehaviour, ISaveDataKnower
+    public class Bootstrapper : Singleton<Bootstrapper>, ISaveDataKnower
     {
         [Header("Audio")]
         [SerializeField]
@@ -45,6 +46,17 @@ namespace Reign.Core.InstanceRequired
         private void OnDisable()
         {
             SceneManager.activeSceneChanged -= LoadSaveData;
+        }
+
+        // Handle Discord Manager calls
+        private void Update()
+        {
+            DiscordManager.AttemptCallbacks();
+        }
+
+        private void OnDestroy()
+        {
+            DiscordManager.Disconnect();
         }
 
         /// <summary>

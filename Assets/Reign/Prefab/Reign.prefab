@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4617514826178926481}
   - component: {fileID: 4291419143388852329}
-  - component: {fileID: 4279854458548060162}
+  - component: {fileID: 6917757571012460441}
   - component: {fileID: 7723366619673212514}
   m_Layer: 0
   m_Name: Reign
@@ -48,15 +48,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100e12b36b9a4c64bb43ebbd5389aa24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reign.Core.Bootstrapper
+  destroyOnLoad: 0
   audioPool: {fileID: 11400000, guid: e61bde38d1ded0e40888e7ea87284ec0, type: 2}
   inputAsset: {fileID: -944628639613478452, guid: 46a816d52dba21e4cbcbdd41899a444a, type: 3}
   actionMapName: Map
   firstDiscordStatus:
-    appID: 0
+    appID: 1453862071543271508
     activityType: 0
-    name: 
+    name: Reign
     details: 
-    state: 
+    state: Testing out Reign...
     largeImageID: 
     largeImageText: 
     smallImageID: 
@@ -65,7 +66,7 @@ MonoBehaviour:
     partyPrivacy: 0
     unixTimestampStart: 0
     unixTimestampEnd: 0
---- !u!114 &4279854458548060162
+--- !u!114 &6917757571012460441
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,9 +75,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 965780758462434373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48b88f74f0dd0c74b9a6657b2e66e2cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cfa99d58f6f47345aa23f1647c07e81, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Reign.DiscordUpdater
+  m_EditorClassIdentifier: Assembly-CSharp::Reign.Core.InstanceRequired.AudioMixerTable
+  destroyOnLoad: 1
+  mixerList:
+  - {fileID: 24100000, guid: 26ab07e574b30f941ba6cbdc02b6ee37, type: 2}
 --- !u!114 &7723366619673212514
 MonoBehaviour:
   m_ObjectHideFlags: 0

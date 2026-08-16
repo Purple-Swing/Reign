@@ -12,10 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e51e2a3a5dae7a4ca7535650e97989b, type: 3}
   m_Name: Audio Pool
   m_EditorClassIdentifier: Assembly-CSharp::Reign.Core.Audio.AudioPool
-  groups:
-  - name: 
-    entries:
-    - name: 
-      volume: 0
-      pitch: 0
-      clips: []
+  groups: []

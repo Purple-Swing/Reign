@@ -8,9 +8,9 @@ namespace Reign.Configuration
         public static class Project
         {
             // [ABOUT]
-            public static string VERSION => Application.version;
-            public static string NAME => Application.productName;
-            public static string COMPANY => Application.companyName;
+            public const string VERSION = "1.0.0";
+            public const string NAME = "My Project";
+            public const string COMPANY = "Default Company";
 
             // [SAVING]
             public const bool ENCRYPTED_SAVES = true;
@@ -20,7 +20,7 @@ namespace Reign.Configuration
             public const ushort SAVE_ENCRYPTION_ITERATIONS = 2048;
 
             // [DISCORD]
-            public const bool DISCORD_ENABLED = false;
+            public const bool DISCORD_ENABLED = true;
         }
     }
 }

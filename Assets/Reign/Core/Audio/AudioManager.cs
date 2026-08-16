@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using Reign.Core.Extensions;
+using System.Threading.Tasks;
+using UnityEngine.Audio;
+using Reign.Core.InstanceRequired;
 
 namespace Reign.Core.Audio
 {
@@ -152,6 +156,37 @@ namespace Reign.Core.Audio
 
             SetupSource(source, null, clipIndex, name, pos, volume, pitch);
             source.Play();
+        }
+
+        /// <summary>
+        /// Create an audio source and play a sound from it without using an Audio Entry.
+        /// </summary>
+        public static async Task<AudioSource> PlayAndCreateSource(string name, int clipIndex, Vector3 pos, float volume = 1.0f, float pitch = 1.0f, bool destroyOnComplete = true, string mixerGroupName = "")
+        {
+            var sourceObject = new GameObject();
+            var source = sourceObject.AddComponent<AudioSource>();
+
+            if (AudioMixerTable.Current != null)
+            {
+                source.outputAudioMixerGroup = AudioMixerTable.Current.GetOutputMixerGroupByName(mixerGroupName);
+            }
+            else
+            {
+                Debug.LogWarning("No AudioMixerTable instance was found: Output Audio Mixer Group of source could not be set.");    
+            }
+
+            SetupSource(source, null, clipIndex, name, pos, volume, pitch);
+            source.Play();
+
+            if (destroyOnComplete)
+            {
+                await Utility.WaitUntilAudioSourceFinishedPlaying(source);
+                return null;
+            }
+            else
+            {
+                return source;
+            }
         }
     }
 }
