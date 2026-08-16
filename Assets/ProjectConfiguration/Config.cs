@@ -21,6 +21,9 @@ namespace Reign.Configuration
 
             // [DISCORD]
             public const bool DISCORD_ENABLED = true;
+
+            // [DEBUG]
+            public const bool DEBUG_SPIT_SAVE_VALUES = true;
         }
     }
 }

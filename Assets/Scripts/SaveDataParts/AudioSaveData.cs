@@ -9,7 +9,7 @@ namespace Reign.API.Saving
         public Dictionary<string, float> audioMixerGroupValues = new Dictionary<string, float>
         {
             // MixerName.ParameterName, Value
-            {"AudioMixer.MasterVolume", -80.0f}
+            {"AudioMixer.MasterVolume", 0.0f}
         };
     }
 }

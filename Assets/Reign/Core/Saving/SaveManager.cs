@@ -1,4 +1,6 @@
 using Reign.API.Saving;
+using Reign.Configuration;
+using Reign.Core.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,8 +18,11 @@ namespace Reign.Core.Saving
 
         public static List<ISaveDataKnower> RefreshKnowers()
         {
-            // Find all scripts that implement ISaveDataKnower
-            return GameObject.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include).OfType<ISaveDataKnower>().ToList();
+            saveDataKnowers.Clear();
+
+            saveDataKnowers.AddRange(GameObject.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include).OfType<ISaveDataKnower>());
+
+            return saveDataKnowers;
         }
 
         private static void LoadAllKnowers()
@@ -38,12 +43,12 @@ namespace Reign.Core.Saving
 
         public async static Task<SaveData> Save()
         {
+            RefreshKnowers();
             SaveAllKnowers();
 
             await saveFileManager.SaveAsync(saveData);
 
             Debug.Log("SaveData saved successfully.");
-
             return saveData;
         }
 
@@ -53,9 +58,18 @@ namespace Reign.Core.Saving
 
             saveData ??= new();
 
+            RefreshKnowers();
             LoadAllKnowers();
 
             Debug.Log("SaveData loaded successfully.");
+
+            if (Config.Project.DEBUG_SPIT_SAVE_VALUES)
+            {
+                var text = $"Save Data Spat:\nMixer Group Values: {Utility.DictionaryPairsToString(saveData.audioMixerGroupValues)}" + 
+                $"Fullscreen: {saveData.fullScreenMode}\nScreen Resolution: {saveData.screenResolution}";
+
+                Debug.Log(text);
+            }
 
             return saveData;
         }

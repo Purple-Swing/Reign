@@ -27,8 +27,10 @@ namespace Reign.Core.InstanceRequired
         [Header("Discord")]
         [SerializeField] private DiscordStatusContainer firstDiscordStatus;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             AudioManager.Refresh(audioPool);
             InputManager.Refresh(inputAsset, actionMapName);
             

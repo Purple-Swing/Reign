@@ -6,6 +6,18 @@ namespace Reign.Core.Extensions
 {
     public static class Utility
     {
+        public static string DictionaryPairsToString<TKey, TValue>(Dictionary<TKey, TValue> dict)
+        {
+            string fin = "";
+
+            foreach (var kvp in dict)
+            {
+                fin += $"{kvp.Key}: {kvp.Value}\n";
+            }
+
+            return fin;
+        }
+
         public static async Task WaitUntilDictionaryHasPairs<TKey, TValue>(Dictionary<TKey, TValue> dict)
         {
             while (dict.Count <= 0)
@@ -28,6 +40,21 @@ namespace Reign.Core.Extensions
             {
                 await Task.Yield();
             }
+        }
+
+        public static float DecibelToLinearAmplitude(float db)
+        {
+            return Mathf.Pow(10, (db/20));
+        }
+
+        public static float DecibelToLinearPower(float db)
+        {
+            return Mathf.Pow(10, (db/10));
+        }
+
+        public static float LinearToDecibel(float lin)
+        {
+            return 10 * Mathf.Log10(lin);
         }
 
         public static string Color32ToHexString(Color32 col)

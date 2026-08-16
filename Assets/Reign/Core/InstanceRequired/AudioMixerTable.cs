@@ -13,19 +13,20 @@ namespace Reign.Core.InstanceRequired
         [SerializeField]
         private List<AudioMixer> mixerList = new();
         
-        public AudioMixer GetMixerByName(string name, out AudioMixer found)
+        public bool GetMixerByName(string name, out AudioMixer found)
         {
             foreach (var mixer in mixerList)
             {
                 if (mixer.name == name)
                 {
                     found = mixer;
-                    return mixer;
+                    return true;
                 }
             }
 
+            Debug.LogWarning($"Mixer by name '{name}' was not found.");
             found = null;
-            return null;
+            return false;
         }
 
         public AudioMixerGroup GetOutputMixerGroupByName(string mixerName)
@@ -40,19 +41,14 @@ namespace Reign.Core.InstanceRequired
             }
         }
 
-        public void GetMixerSetFloat(string mixerName, string param, float value)
-        {
-            if (GetMixerByName(mixerName, out var mixer))
-            {
-                mixer.SetFloat(param, value);
-            }
-        }
         public void OnSave(ref SaveData data)
         {
         }
 
         public void OnLoad(SaveData data)
         {
+            // Set all registered audio mixer values to saved values.
+
             foreach (var pair in data.audioMixerGroupValues)
             {
                 var name = pair.Key.Split(".");
@@ -60,7 +56,10 @@ namespace Reign.Core.InstanceRequired
                 var mixerNamePart = name[0];
                 var parameterNamePart = name[1];
 
-                GetMixerSetFloat(mixerNamePart, parameterNamePart, pair.Value);
+                if (GetMixerByName(mixerNamePart, out var mixer))
+                {
+                    mixer.SetFloat(parameterNamePart, pair.Value);
+                }
             }
         }
     }
