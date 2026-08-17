@@ -65,7 +65,7 @@ namespace Reign.Core.Saving
 
             if (Config.Project.DEBUG_SPIT_SAVE_VALUES)
             {
-                var text = $"Save Data Spat:\nMixer Group Values: {Utility.DictionaryPairsToString(saveData.audioMixerGroupValues)}" + 
+                var text = $"Save Data Spat:\nMixer Group Values: {Utility.Dictionary.DictionaryPairsToString(saveData.audioMixerGroupValues)}" + 
                 $"Fullscreen: {saveData.fullScreenMode}\nScreen Resolution: {saveData.screenResolution}";
 
                 Debug.Log(text);

@@ -1,3 +1,5 @@
+#pragma warning disable 0162
+
 using HouraiTeahouse.Discord;
 using Reign.Configuration;
 using System;

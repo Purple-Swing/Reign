@@ -13,6 +13,9 @@ namespace Reign.Core.InstanceRequired
         [SerializeField]
         private List<AudioMixer> mixerList = new();
         
+        /// <summary>
+        /// Get a mixer by name of the Object.
+        /// </summary>
         public bool GetMixerByName(string name, out AudioMixer found)
         {
             foreach (var mixer in mixerList)
@@ -29,6 +32,9 @@ namespace Reign.Core.InstanceRequired
             return false;
         }
 
+        /// <summary>
+        /// Return the output mixer group of a mixer with the name of mixerName.
+        /// </summary>
         public AudioMixerGroup GetOutputMixerGroupByName(string mixerName)
         {
             if (GetMixerByName(mixerName, out var mixer))

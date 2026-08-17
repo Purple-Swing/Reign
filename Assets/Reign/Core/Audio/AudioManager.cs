@@ -180,7 +180,7 @@ namespace Reign.Core.Audio
 
             if (destroyOnComplete)
             {
-                await Utility.WaitUntilAudioSourceFinishedPlaying(source);
+                await Utility.Tasks.WaitUntilAudioSourceFinishedPlaying(source);
                 return null;
             }
             else

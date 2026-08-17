@@ -26,6 +26,9 @@ namespace Reign.Core.Generic
             }
         }
 
+        /// <summary>
+        /// Find object of type T with the name of ID.
+        /// </summary>
         public T Find(string id)
         {
             if(assetDictionary.TryGetValue(id, out var found))
@@ -34,7 +37,7 @@ namespace Reign.Core.Generic
                 return found;
             }
 
-            // Return the null equivalent of type T
+            // Return the null equivalent of type T.
             return default;
         }
 

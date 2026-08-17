@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Reign.Core.Generic;
 using UnityEngine;
 
 namespace Reign.Configuration
