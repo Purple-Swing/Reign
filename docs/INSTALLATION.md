@@ -14,7 +14,7 @@
    <br>
 
 2. Personalise
-   Reign has been successfully installed. 
+   - Reign has been successfully installed. 
    - Check the [wiki](https://github.com/Purple-Swing/Reign/wiki) to find out how to customise/personalise your project using <b>Config</b>.
 ---
 
