@@ -8,32 +8,32 @@ QualitySettings:
   m_QualitySettings:
   - serializedVersion: 5
     name: Default
-    pixelLightCount: 2
+    pixelLightCount: 0
     shadows: 2
-    shadowResolution: 1
+    shadowResolution: 2
     shadowProjection: 1
-    shadowCascades: 2
-    shadowDistance: 40
-    shadowNearPlaneOffset: 3
+    shadowCascades: 4
+    shadowDistance: 95
+    shadowNearPlaneOffset: 8
     shadowCascade2Split: 0.33333334
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
-    shadowmaskMode: 1
-    skinWeights: 2
+    shadowmaskMode: 0
+    skinWeights: 1
     globalTextureMipmapLimit: 0
     textureMipmapLimitSettings: []
-    anisotropicTextures: 1
-    antiAliasing: 0
+    anisotropicTextures: 0
+    antiAliasing: 2
     softParticles: 0
-    softVegetation: 1
-    realtimeReflectionProbes: 1
-    billboardsFaceCameraPosition: 1
+    softVegetation: 0
+    realtimeReflectionProbes: 0
+    billboardsFaceCameraPosition: 0
     useLegacyDetailDistribution: 0
     adaptiveVsync: 0
     vSyncCount: 0
-    realtimeGICPUUsage: 50
+    realtimeGICPUUsage: 25
     adaptiveVsyncExtraA: 0
     adaptiveVsyncExtraB: 0
-    lodBias: 1
+    lodBias: 0.3
     meshLodThreshold: 1
     maximumLODLevel: 0
     enableLODCrossFade: 1
@@ -43,12 +43,12 @@ QualitySettings:
     streamingMipmapsRenderersPerFrame: 512
     streamingMipmapsMaxLevelReduction: 2
     streamingMipmapsMaxFileIORequests: 1024
-    particleRaycastBudget: 256
+    particleRaycastBudget: 4
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 11400000, guid: 90e9cf7e6c19bf340b56d109b11b1f31, type: 2}
+    customRenderPipeline: {fileID: 0}
     terrainQualityOverrides: 0
     terrainPixelError: 1
     terrainDetailDensityScale: 1
@@ -65,6 +65,7 @@ QualitySettings:
     EmbeddedLinux: 0
     GameCoreScarlett: 0
     GameCoreXboxOne: 0
+    Kepler: 0
     LinuxHeadlessSimulation: 0
     Nintendo Switch: 0
     Nintendo Switch 2: 0
@@ -72,7 +73,6 @@ QualitySettings:
     PS5: 0
     QNX: 0
     Server: 0
-    Stadia: 0
     Standalone: 0
     VisionOS: 0
     WebGL: 0

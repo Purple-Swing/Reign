@@ -1,50 +1,25 @@
-<p align="center">
-    <img src="/Assets/Plugins/Reign/Graphics/Branding/ReignLogo.png" width="500px">
-</p>
+<h1 align="center">Reign</h1>
 
-<h3 align="center">
-    © Purple Swing, 2026
-</h3>
+---
+
+<p align="center"><b>© Purple Swing, 2026</b></p>
+
 <p align="center">
-    <a href="https://github.com/Purple-Swing/Reign/wiki">Documentation</a> | <a href="/LICENSE.md">License</a> | <a href="/CONTRIBUTING.md">Contribution</a>
+<a href="/LICENSE.md">LICENSE</a> | <a href="https://github.com/Purple-Swing/Reign/wiki">DOCUMENTATION</a> | <a href="https://github.com/Purple-Swing/Reign/releases/latest">LATEST RELEASE</a> 
 </p>
 
 ---
 
 ### About
 
-Reign — created by [Purple Swing](https://github.com/Purple-Swing) — is a **lightweight and performant** group of systems and assets that aid Unity game development by adding built-in features to speed up development, built without AI. It singlehandedly controls a wide variety of issues stemming from the lacking nature of Unity all in one huge bundle. 
+Reign is a toolkit that enhances Unity game development by supplying users with performant systems for different circumstances.
 
-<img src="/GitHub/ReignThumbnail.png" width="900px">
+Reign adds many crucial things to your Unity project, such as: a save system, input manager, scene transitions, state manager, audio manager, Discord RPC status manager and much more.
 
----
-
-### Features
-
-- Expandable cross-platform save file system
-- Easily manageable audio system
-- Mixer system that controls audio mixer groups
-- Flexible input system
-- Discord RPC support
-- Scene loading system (including transitions)
-- Massive built-in utility class
-- UI management and systems
-- Reign Essentials and Internal scripts
-- Asynchronous Event Bus and Query Bus
-- Object pooling
-- Generic fonts included by default ([Credited here](/LICENSE.md#used-resources))
-- [DOTween (Free)](https://dotween.demigiant.com/) by Demigiant
-<br>and much more...
+Reign is best used when making video games with large amounts of content or creating prototypes.
 
 ---
 
-### Documentation
-[Documentation](https://github.com/Purple-Swing/Reign/wiki) is still being created and finalised, but as Reign straightens out: we will continue to make corrections and changes. 
+### Installation
 
----
-
-### Development
-
-Reign's Releases:
-- "Legacy" - 0.5.0.1 and prior - `🔴 Deprecated, unrecommended`
-- "Modern" - 1.0.0.0 and up - `🟢 Fully supported`
+Read the [INSTALLATION](/docs/INSTALLATION.md) guide.

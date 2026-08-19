@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Discord
+namespace HouraiTeahouse.Discord
 {
     public partial class ActivityManager
     {

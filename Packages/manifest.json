@@ -1,20 +1,12 @@
 {
   "dependencies": {
-    "com.dbrizov.naughtyattributes": "2.1.5",
     "com.discord.game-sdk": "3.1.0",
-    "com.unity.2d.sprite": "1.0.0",
-    "com.unity.ai.navigation": "2.0.12",
-    "com.unity.device-simulator.devices": "1.0.1",
     "com.unity.feature.2d": "2.0.2",
-    "com.unity.feature.characters-animation": "1.0.0",
     "com.unity.ide.visualstudio": "2.0.27",
     "com.unity.inputsystem": "1.19.0",
-    "com.unity.localization": "1.5.11",
     "com.unity.multiplayer.center": "1.0.1",
-    "com.unity.netcode.gameobjects": "2.11.0",
     "com.unity.nuget.newtonsoft-json": "3.2.2",
     "com.unity.render-pipelines.universal": "17.4.0",
-    "com.unity.ugui": "2.0.0",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.adaptiveperformance": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
@@ -56,13 +48,6 @@
       "url": "https://upm.houraiteahouse.net",
       "scopes": [
         "com.discord"
-      ]
-    },
-    {
-      "name": "package.openupm.com",
-      "url": "https://package.openupm.com",
-      "scopes": [
-        "com.dbrizov.naughtyattributes"
       ]
     }
   ]

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Discord
+namespace HouraiTeahouse.Discord
 {
     static class Constants
     {
