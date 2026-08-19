@@ -8,9 +8,6 @@ namespace Reign.Configuration
     {
         public static class Reign
         {
-            // Reign uses predefined variables in the Config.Reign class so that distinguishing 
-            // differences is much easier.
-
             public const string VERSION = "2.0.0";
 
             public static readonly Dictionary<string, string> CONTRIBUTORS = new()

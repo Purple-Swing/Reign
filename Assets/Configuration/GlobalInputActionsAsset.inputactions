@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "GlobalInputActionAsset",
+    "name": "GlobalInputActionsAsset",
     "maps": [
         {
             "name": "Map",

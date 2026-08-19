@@ -1,12 +1,12 @@
-<div style="text-align: center">
+<h1 align="center">Reign</h1>
 
-<h2>Reign</h2>
+---
 
-© Purple Swing, 2026
+<p align="center"><b>© Purple Swing, 2026</b></p>
 
-[LICENSE](/LICENSE.md) | [DOCUMENTATION](https://github.com/Purple-Swing/Reign/wiki) | [LATEST RELEASE](https://github.com/Purple-Swing/Reign/releases/latest) 
-
-</div>
+<p align="center">
+<a href="/LICENSE.md">LICENSE</a> | <a href="https://github.com/Purple-Swing/Reign/wiki">DOCUMENTATION</a> | <a href="https://github.com/Purple-Swing/Reign/releases/latest">LATEST RELEASE</a> 
+</p>
 
 ---
 
@@ -16,4 +16,10 @@ Reign is a toolkit that enhances Unity game development by supplying users with 
 
 Reign adds many crucial things to your Unity project, such as: a save system, input manager, scene transitions, state manager, audio manager, Discord RPC status manager and much more.
 
-Reign is best used when making video games with large amounts of content and creating prototypes.
+Reign is best used when making video games with large amounts of content or creating prototypes.
+
+---
+
+### Installation
+
+Read the [INSTALLATION](/docs/INSTALLATION.md) guide.
