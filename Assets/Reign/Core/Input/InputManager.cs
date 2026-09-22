@@ -28,6 +28,10 @@ namespace Reign.Core.Input
             Map?.Disable();
         }
 
+        /// <summary>
+        /// Returns an input action by finding the action by name.
+        /// <param name="tryAdd"> If there should be an attempt to add the action to the actions dictionary.
+        /// </summary>
         public static InputAction FindOrAddAction(string name, bool tryAdd = true)
         {
             if (actions == null) return null;
@@ -53,6 +57,18 @@ namespace Reign.Core.Input
         }
 
         /// <summary>
+        /// Get the active control of an action by name.
+        /// </summary>
+        public static InputControl GetActiveControl(string name)
+        {
+            if (Map == null) return null;
+
+            var action = FindOrAddAction(name);
+
+            return action?.activeControl;
+        }
+
+        /// <summary>
         /// Find the action by name and return if it is being performed.
         /// </summary>
         public static bool GetButton(string name)
@@ -68,7 +84,7 @@ namespace Reign.Core.Input
         }
 
         /// <summary>
-        /// Get the vaue by name and return the current value.
+        /// Get the value by name and return the current value.
         /// </summary>
         public static T GetValue<T>(string name) where T : struct
         {
