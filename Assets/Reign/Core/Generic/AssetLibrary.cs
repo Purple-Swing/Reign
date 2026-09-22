@@ -12,13 +12,17 @@ namespace Reign.Core.Generic
 
     public abstract class AssetLibrary<T> : MonoBehaviour where T : Object
     {
-        [SerializeField]
-        private List<AssetEntry<T>> assetList;
+        [SerializeField] private List<AssetEntry<T>> assetList;
 
-        private Dictionary<string, T> assetDictionary;
+        private Dictionary<string, T> assetDictionary = new();
 
+        /// <summary>
+        /// Clears and updates the asset dictionary using the asset list.
+        /// </summary>
         public void Refresh()
         {
+            assetDictionary.Clear();
+
             foreach (var entry in assetList)
             {
                 // For each given entry, add with ID and asset.
@@ -41,9 +45,24 @@ namespace Reign.Core.Generic
             return default;
         }
 
-        public T GetValueAtIndex(int index)
+        /// <summary>
+        /// Attempts to find the asset of the list at a given index. 
+        /// </summary>
+        public bool TryGetValueAtIndex(int index, out T asset)
         {
-            return assetList[index].asset;
+            if (index >= 0 && index < assetList.Count)
+            {
+                asset = assetList[index].asset;
+                return asset != null;
+            }
+
+            asset = default;
+            return false;
+        }
+
+        private void Awake()
+        {
+            Refresh();
         }
     }
 }
