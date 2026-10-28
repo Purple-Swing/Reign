@@ -29,7 +29,7 @@ namespace Reign.Core.Extensions
         /// </summary>
         public static class Tasks
         {
-            public static async Task WaitUntilDictionaryHasPairs<TKey, TValue>(Dictionary<TKey, TValue> dict)
+            public static async Task WaitUntilDictionaryIsNotEmpty<TKey, TValue>(Dictionary<TKey, TValue> dict)
             {
                 while (dict.Count <= 0)
                 {
@@ -37,7 +37,7 @@ namespace Reign.Core.Extensions
                 }
             }
 
-            public static async Task WaitUntilListHasValues<T>(List<T> list)
+            public static async Task WaitUntilListIsNotEmpty<T>(List<T> list)
             {
                 while (list.Count <= 0)
                 {
