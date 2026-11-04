@@ -8,7 +8,7 @@ namespace Reign.Configuration
     {
         public static class Reign
         {
-            public const string VERSION = "2.0.2";
+            public const string VERSION = "2.0.3";
 
             public static readonly Dictionary<string, string> CONTRIBUTORS = new()
             {

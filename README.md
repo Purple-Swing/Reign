@@ -22,4 +22,4 @@ Reign is best used when making video games with large amounts of content or crea
 
 ### Installation
 
-Read the [INSTALLATION](/docs/INSTALLATION.md) guide.
+Read the [INSTALLATION](/Docs/INSTALLATION.md) guide.

@@ -5,7 +5,7 @@
    - Download the [newest release](https://github.com/Purple-Swing/Reign/releases/latest) of Reign
    - Create a new folder for your Unity project that will use Reign. Unzip the downloaded Reign archive here.
    - Once Reign has fully extracted into the project folder, it should look like this:
-   <br><img src="/docs/images/projectExample.png" width="500">
+   <br><img src="/Docs/images/projectExample.png" width="500">
    <br>
 
 1. Open
@@ -20,4 +20,4 @@
 
 # Updating Reign
 
-Use the [Reign Updater](https://github.com/Purple-Swing/Reign-Updater).
+Use the [Reign Updater](https://github.com/Purple-Swing/Reign-Updater) and input your project's directory along with the new Reign version's directory, the Reign Updater will replace all relevant files.
