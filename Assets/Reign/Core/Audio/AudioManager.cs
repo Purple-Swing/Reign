@@ -11,7 +11,7 @@ namespace Reign.Core.Audio
     public static class AudioManager
     {
         private static AudioPool pool;
-        private static Dictionary<string, AudioEntry> entries;
+        private static Dictionary<string, AudioEntry> entries = new();
 
         public static void Refresh(AudioPool givenPool)
         {
