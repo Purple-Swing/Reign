@@ -1,3 +1,4 @@
+
 using Reign.Core.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -7,8 +8,9 @@ namespace Reign.Core.InstanceRequired
 {
     public class SceneTransitioner : Singleton<SceneTransitioner>
     {
-        [SerializeField]
-        private Image transitionOverlay;
+        [SerializeField] private Image transitionOverlay;
+
+        private int fadeVersion;
 
         public enum TransitionFadeDirection
         {
@@ -18,6 +20,8 @@ namespace Reign.Core.InstanceRequired
 
         public async Task Fade(TransitionFadeDirection dir, float duration)
         {
+            int currentVersion = ++fadeVersion;
+
             float target = dir == TransitionFadeDirection.In ? 1.0f : 0.0f;
 
             Color color = transitionOverlay.color;
@@ -26,9 +30,15 @@ namespace Reign.Core.InstanceRequired
             {
                 await Task.Yield();
 
+                // Discontinue because another fade has started.
+                if (currentVersion != fadeVersion)
+                {
+                    return;
+                }
+
                 color = transitionOverlay.color;
 
-                float newAlpha = Mathf.MoveTowards(color.a, target, Time.unscaledDeltaTime * duration);
+                float newAlpha = duration <= 0 ? target : Mathf.MoveTowards(color.a, target, Time.unscaledDeltaTime / duration);
 
                 transitionOverlay.color = new Color(color.r, color.g, color.b, newAlpha);
             }
